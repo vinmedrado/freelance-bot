@@ -22,7 +22,12 @@ Sistema local para encontrar oportunidades freelance, avaliar aderencia ao perfi
 
 O projeto automatiza a triagem e a preparacao da proposta, mas nao envia propostas automaticamente.
 
-> Portfolio page: habilite GitHub Pages apontando para `/docs` depois de publicar o repositorio.
+**Portfolio publicado**
+
+- Landing: https://vinmedrado.github.io/freelance-bot/
+- Demo navegavel: https://vinmedrado.github.io/freelance-bot/demo.html
+
+A demo publicada no GitHub Pages e estatica e roda 100% no navegador, com dados simulados. Ela existe para demonstrar a experiencia do produto sem exigir instalacao. O produto local completo roda com Python, Flask, SQLite, Playwright e integracao Groq.
 
 ## Por que existe
 
@@ -40,6 +45,19 @@ O FreelanceBot AI reduz esse trabalho repetitivo com um pipeline local e auditav
 6. Exibe tudo em um dashboard Flask para revisao, copia, download e controle de status.
 
 A IA via Groq e usada no fluxo de analise textual. As camadas de inteligencia, estrategia, precificacao, proposta estruturada, PDF e dashboard possuem fallback deterministico para visualizacao e revisao.
+
+## Demo de portfolio
+
+A demo em `docs/demo.html` replica a experiencia principal do dashboard com dados demonstrativos:
+
+- fila de oportunidades por status;
+- filtros por texto e categoria;
+- selecao de projeto com diagnostico e entregaveis;
+- estimativa de preco, horas, prazo, confianca e risco;
+- proposta editavel e copiavel;
+- simulacao de varredura e mudanca de status.
+
+Essa separacao evita depender de login, scraping ou banco local para uma avaliacao rapida do projeto.
 
 ## Principais recursos
 
@@ -190,10 +208,10 @@ http://localhost:5050
 
 ## Screenshots
 
-![Dashboard](docs/images/dashboard.png)
-![Detalhe da proposta](docs/images/detail.png)
-![Proposta estruturada](docs/images/proposal.png)
-![PDF](docs/images/pdf.png)
+![Landing](docs/images/landing.png)
+![Dashboard da demo](docs/images/demo-dashboard.png)
+![Detalhe da oportunidade](docs/images/demo-detail.png)
+![Proposta editavel](docs/images/demo-proposal.png)
 
 ## Qualidade
 
@@ -220,7 +238,15 @@ python -m py_compile ai_engine.py commercial_strategy.py db.py knowledge_engine.
 
 ## Valor como portfolio
 
-Este e um projeto recomendavel para portfolio porque demonstra automacao, produto, dados, IA aplicada, regras deterministicicas, persistencia, interface web e testes. Para ficar ainda mais forte publicamente, o ideal e manter screenshots reais, documentar limitacoes dos scrapers e evitar expor dados pessoais ou chaves no historico.
+Este e um projeto recomendavel para portfolio porque demonstra automacao, produto, dados, IA aplicada, regras deterministicicas, persistencia, interface web e testes. A landing apresenta o problema e a proposta de valor; a demo permite experimentar o fluxo operacional sem instalar nada.
+
+## Limitacoes e seguranca
+
+- Scrapers dependem da estrutura das plataformas e podem exigir ajustes quando as telas mudam.
+- Algumas plataformas exigem login ou sessao de navegador ja autenticada.
+- O projeto nao envia propostas automaticamente; a revisao humana faz parte do fluxo.
+- Dados locais, banco SQLite, perfis de navegador, artefatos e `.env` ficam fora do versionamento.
+- Precos e prazos sao estimativas assistivas, nao garantias comerciais.
 
 ## Licenca
 
