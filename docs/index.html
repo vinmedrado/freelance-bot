@@ -3,561 +3,506 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FreelanceBot AI | Demo do produto</title>
-  <meta name="description" content="Demo navegavel do FreelanceBot AI: radar de oportunidades, precificacao e propostas comerciais.">
+  <title>FreelanceBot AI | Portfolio Case</title>
+  <meta name="description" content="FreelanceBot AI: sistema local para triagem de oportunidades freelance, precificacao e geracao de propostas comerciais.">
   <style>
     :root {
-      --bg: #eef1f4;
-      --panel: #ffffff;
-      --soft: #f5f7f9;
-      --line: #d9e0e7;
-      --line-strong: #c8d0db;
-      --ink: #111827;
-      --muted: #637083;
-      --dark: #121926;
-      --teal: #0f5967;
-      --gold: #b98b35;
-      --green: #287a55;
-      --red: #a43a32;
-      --shadow: 0 20px 50px rgba(17, 24, 39, .12);
-      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --bg: #f4f6f8;
+      --ink: #101418;
+      --muted: #5f6b7a;
+      --line: #d9e0e8;
+      --dark: #111827;
+      --teal: #0f6b78;
+      --gold: #b8872f;
+      --green: #27825c;
+      --surface: #ffffff;
+      --shadow: 0 24px 70px rgba(16, 20, 24, .14);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      min-height: 100vh;
-      background: linear-gradient(180deg, #e9eef2 0, var(--bg) 420px);
+      background: var(--bg);
       color: var(--ink);
     }
-    button, input, select, textarea { font: inherit; }
-    button { cursor: pointer; }
-    .app { min-height: 100vh; display: grid; grid-template-columns: 260px minmax(0, 1fr); }
-    .sidebar {
-      padding: 18px;
+    a { color: inherit; }
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+    .mark {
+      width: 40px;
+      height: 40px;
+      position: relative;
+      flex: 0 0 auto;
+      border-radius: 8px;
       background: var(--dark);
-      color: white;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow: auto;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
     }
-    .brand { display: flex; align-items: center; gap: 11px; margin-bottom: 26px; }
-    .mark { width: 38px; height: 38px; border-radius: 8px; background: #223044; position: relative; }
-    .mark:before { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.45); border-radius: 50%; }
-    .mark:after { content: ""; position: absolute; top: 8px; right: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
-    .brand strong { display: block; line-height: 1.1; }
-    .brand span { color: #b8c2d1; font-size: 12px; }
-    .nav { display: grid; gap: 6px; }
-    .nav button {
+    .mark::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(255, 255, 255, .42);
+      border-radius: 999px;
+    }
+    .mark::after {
+      content: "";
+      position: absolute;
+      top: 9px;
+      right: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--gold);
+    }
+    .nav a {
       min-height: 40px;
-      border: 0;
-      border-radius: 8px;
-      background: transparent;
-      color: #cbd5e1;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 0 10px;
-      text-align: left;
-      font-weight: 700;
-    }
-    .nav button.active, .nav button:hover { background: rgba(255,255,255,.09); color: white; }
-    .nav small { color: #8fa0b6; font-weight: 800; }
-    .side-note {
-      margin-top: 24px;
-      padding: 12px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 8px;
-      color: #cbd5e1;
-      font-size: 12px;
-      line-height: 1.55;
-      background: rgba(255,255,255,.05);
-    }
-
-    .main { min-width: 0; padding: 20px 22px 42px; }
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 14px;
-      margin-bottom: 16px;
-    }
-    .title h1 { margin: 0; font-size: 24px; letter-spacing: 0; }
-    .title p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
-    .actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
-    .btn {
-      min-height: 38px;
+      padding: 0 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: var(--panel);
-      color: var(--ink);
-      padding: 0 12px;
-      font-size: 13px;
-      font-weight: 800;
+      background: rgba(255, 255, 255, .78);
       text-decoration: none;
+      font-size: 14px;
+      font-weight: 750;
+    }
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, .94fr) minmax(420px, 1.06fr);
+      gap: 44px;
+      align-items: center;
+      padding: 40px 0 70px;
+    }
+    .eyebrow {
+      margin-bottom: 14px;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1 {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 590px;
+      margin: 22px 0 0;
+      color: #435063;
+      font-size: 18px;
+      line-height: 1.65;
+    }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+    .btn {
+      min-height: 44px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-    .btn.primary { background: var(--dark); border-color: var(--dark); color: white; }
-    .btn.gold { background: var(--gold); border-color: var(--gold); color: #111827; }
-    .btn:disabled { opacity: .55; cursor: default; }
-
-    .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
-    .kpi { border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.82); padding: 14px; box-shadow: 0 10px 28px rgba(17,24,39,.05); }
-    .kpi span { color: var(--muted); font-size: 12px; font-weight: 750; }
-    .kpi strong { display: block; margin-top: 7px; font-size: 24px; letter-spacing: 0; }
-
-    .workspace { display: grid; grid-template-columns: minmax(380px, 44fr) minmax(420px, 56fr); gap: 12px; align-items: start; }
-    .panel { border: 1px solid var(--line); border-radius: 8px; background: rgba(255,255,255,.9); box-shadow: 0 12px 34px rgba(17,24,39,.06); overflow: hidden; }
-    .panel-head {
-      min-height: 54px;
-      padding: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid var(--line);
-      background: #fbfcfd;
-    }
-    .panel-head strong { font-size: 14px; }
-    .filters { display: grid; grid-template-columns: 1fr 120px; gap: 8px; padding: 10px; border-bottom: 1px solid var(--line); background: var(--soft); }
-    .field { width: 100%; border: 1px solid var(--line); border-radius: 8px; background: white; min-height: 36px; padding: 0 10px; color: var(--ink); }
-    .list { display: grid; gap: 1px; background: var(--line); max-height: calc(100vh - 260px); overflow: auto; }
-    .project {
-      border: 0;
-      background: white;
-      text-align: left;
-      padding: 13px;
-      display: grid;
-      grid-template-columns: 46px 1fr auto;
-      gap: 10px;
-      align-items: center;
-    }
-    .project.active { background: #eef7f8; box-shadow: inset 4px 0 0 var(--teal); }
-    .score { width: 42px; height: 42px; border-radius: 8px; display: grid; place-items: center; color: white; background: var(--green); font: 850 12px var(--mono); }
-    .score.mid { background: var(--gold); color: #111827; }
-    .project-title { font-weight: 850; line-height: 1.25; }
-    .meta { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
-    .chip { border-radius: 999px; background: #edf1f5; color: #576477; padding: 3px 7px; font-size: 11px; font-weight: 800; }
-    .chip.warn { background: #f6ead0; color: #875f17; }
-    .value { text-align: right; font-weight: 900; color: var(--teal); white-space: nowrap; }
-    .value small { display: block; color: var(--muted); font-weight: 700; margin-top: 4px; }
-
-    .detail { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 0; }
-    .content { padding: 16px; min-width: 0; }
-    .aside { padding: 16px; border-left: 1px solid var(--line); background: #fbfcfd; }
-    .selected-title { margin: 0 0 10px; font-size: 26px; line-height: 1.08; letter-spacing: 0; }
-    .section { margin-top: 18px; }
-    .section h2 { margin: 0 0 9px; font-size: 14px; }
-    .text { margin: 0; color: #334155; line-height: 1.6; font-size: 14px; }
-    .deliverables { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
-    .deliverables li { display: flex; gap: 8px; color: #334155; font-size: 14px; line-height: 1.45; }
-    .check { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; flex: 0 0 auto; background: #e8f5ee; color: var(--green); font-size: 12px; font-weight: 900; }
-    .proposal-box {
-      min-height: 260px;
-      width: 100%;
-      resize: vertical;
+      padding: 0 16px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      padding: 12px;
-      color: #1f2937;
+      background: var(--surface);
+      text-decoration: none;
+      font-weight: 800;
+    }
+    .btn.primary {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: white;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 34px;
+      max-width: 610px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--line);
+    }
+    .metrics div {
+      padding: 16px;
+      background: rgba(255, 255, 255, .82);
+    }
+    .metrics strong {
+      display: block;
+      font-size: 18px;
+    }
+    .metrics span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 760;
+    }
+    .product {
+      position: relative;
+      min-height: 560px;
+    }
+    .board {
+      position: absolute;
+      inset: 20px 0 auto 20px;
+      min-height: 420px;
+      padding: 18px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, #111827, #164852);
+      color: white;
+      box-shadow: var(--shadow);
+    }
+    .board-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      font-weight: 850;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #d8eef2;
+      font-size: 12px;
+    }
+    .status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--green);
+    }
+    .cards {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .opp {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .96);
+      color: var(--ink);
+    }
+    .score {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--green);
+      color: white;
+      font-weight: 900;
+    }
+    .opp strong { display: block; line-height: 1.25; }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .chip {
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: #eef2f6;
+      color: #536273;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .money {
+      text-align: right;
+      color: var(--teal);
+      font-weight: 950;
+    }
+    .money small {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-weight: 760;
+    }
+    .summary {
+      position: absolute;
+      right: 0;
+      bottom: 12px;
+      width: min(330px, 82%);
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fffaf0;
+      box-shadow: 0 18px 44px rgba(16, 20, 24, .16);
+    }
+    .summary small {
+      color: var(--muted);
+      font-weight: 850;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .summary h2 {
+      margin: 8px 0 14px;
+      font-size: 34px;
+      letter-spacing: 0;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .summary-grid div {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      font-size: 13px;
+      font-weight: 800;
+    }
+    .section {
+      padding: 64px 0;
+      border-top: 1px solid var(--line);
+    }
+    .section h2 {
+      margin: 0 0 24px;
+      font-size: 32px;
+      letter-spacing: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .item {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .82);
+    }
+    .item strong {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    .item p {
+      margin: 0;
+      color: var(--muted);
       line-height: 1.55;
+    }
+    .screens {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .screen {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
       background: white;
     }
-    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .metric { border: 1px solid var(--line); border-radius: 8px; background: white; padding: 10px; }
-    .metric span { display: block; color: var(--muted); font-size: 11px; font-weight: 800; }
-    .metric strong { display: block; margin-top: 5px; }
-    .big-price { font-size: 34px; font-weight: 950; letter-spacing: 0; margin: 3px 0 12px; }
-    .status-select { margin-top: 8px; }
-    .console {
-      display: none;
-      margin-top: 12px;
-      padding: 12px;
-      border-radius: 8px;
-      background: #080e18;
-      color: #cbd5e1;
-      font: 12px/1.6 var(--mono);
-      max-height: 180px;
-      overflow: auto;
+    .screen img {
+      display: block;
+      width: 100%;
+      border-radius: 6px;
+      border: 1px solid var(--line);
     }
-    .console.open { display: block; }
-    .toast {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      background: var(--dark);
-      color: white;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: .18s ease;
-      box-shadow: var(--shadow);
-      font-size: 13px;
-      z-index: 20;
+    footer {
+      padding: 32px 0 48px;
+      color: var(--muted);
+      font-size: 14px;
     }
-    .toast.show { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 1060px) {
-      .app { grid-template-columns: 1fr; }
-      .sidebar { position: static; height: auto; }
-      .workspace, .detail { grid-template-columns: 1fr; }
-      .aside { border-left: 0; border-top: 1px solid var(--line); }
-      .list { max-height: none; }
+    @media (max-width: 920px) {
+      .hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+      }
+      .product {
+        min-height: auto;
+      }
+      .board,
+      .summary {
+        position: static;
+        width: auto;
+      }
+      .summary {
+        margin-top: 14px;
+      }
+      .grid,
+      .screens {
+        grid-template-columns: 1fr;
+      }
     }
-    @media (max-width: 680px) {
-      .main { padding: 14px 12px 34px; }
-      .topbar { align-items: flex-start; flex-direction: column; }
-      .actions, .btn { width: 100%; }
-      .kpis, .filters, .metric-grid { grid-template-columns: 1fr; }
-      .project { grid-template-columns: 1fr; }
-      .value { text-align: left; }
+    @media (max-width: 640px) {
+      .nav {
+        height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      h1 {
+        font-size: 38px;
+      }
+      .lead {
+        font-size: 16px;
+      }
+      .actions,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+      .actions {
+        display: grid;
+      }
+      .btn,
+      .nav a {
+        width: 100%;
+      }
+      .opp {
+        grid-template-columns: 1fr;
+      }
+      .money {
+        text-align: left;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <aside class="sidebar">
+  <div class="wrap">
+    <nav class="nav">
       <div class="brand">
         <span class="mark" aria-hidden="true"></span>
-        <div><strong>FreelanceBot AI</strong><span>Demo do produto</span></div>
+        <span>FreelanceBot AI</span>
       </div>
-      <nav class="nav" aria-label="Status">
-        <button class="active" data-status="todos">Radar <small id="count-todos">0</small></button>
-        <button data-status="proposta_gerada">Pendentes <small id="count-proposta_gerada">0</small></button>
-        <button data-status="enviado">Enviados <small id="count-enviado">0</small></button>
-        <button data-status="respondeu">Responderam <small id="count-respondeu">0</small></button>
-        <button data-status="em_andamento">Em andamento <small id="count-em_andamento">0</small></button>
-      </nav>
-      <div class="side-note">
-        Demo estatica para GitHub Pages. Ela simula a experiencia do Flask: triagem, filtros, status, proposta e copia para envio.
-      </div>
-    </aside>
+      <a href="demo.html">Abrir demo</a>
+    </nav>
 
-    <main class="main">
-      <header class="topbar">
-        <div class="title">
-          <h1>Central de oportunidades</h1>
-          <p>Revise projetos, valide escopo, estime preco e prepare a proposta.</p>
-        </div>
+    <main class="hero">
+      <section>
+        <div class="eyebrow">Portfolio case</div>
+        <h1>Radar local para transformar oportunidades freelance em propostas calculadas.</h1>
+        <p class="lead">
+          Um sistema Python com scraping, matching, base de conhecimento, pricing deterministico,
+          geracao de proposta e dashboard Flask para revisar oportunidades antes do envio.
+        </p>
         <div class="actions">
-          <button class="btn gold" id="scan-btn">Nova varredura</button>
-          <button class="btn" id="copy-btn">Copiar proposta</button>
-          <a class="btn primary" href="https://github.com/vinmedrado/freelance-bot" target="_blank" rel="noopener noreferrer">Repositorio</a>
+          <a class="btn primary" href="demo.html">Experimentar produto</a>
+          <a class="btn" href="https://github.com/vinmedrado/freelance-bot" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
         </div>
-      </header>
-
-      <section class="kpis">
-        <div class="kpi"><span>Encontrados</span><strong id="kpi-found">0</strong></div>
-        <div class="kpi"><span>Qualificados</span><strong id="kpi-qualified">0</strong></div>
-        <div class="kpi"><span>Valor potencial</span><strong id="kpi-value">R$ 0</strong></div>
-        <div class="kpi"><span>Score medio</span><strong id="kpi-score">0</strong></div>
+        <div class="metrics">
+          <div><strong>3 fontes</strong><span>Workana, 99Freelas e Freelancer.com</span></div>
+          <div><strong>7 etapas</strong><span>da coleta ao PDF comercial</span></div>
+          <div><strong>pytest</strong><span>validacao automatizada do core</span></div>
+        </div>
       </section>
 
-      <section class="workspace">
-        <div class="panel">
-          <div class="panel-head"><strong>Fila de projetos</strong><span class="chip" id="filtered-count">0 itens</span></div>
-          <div class="filters">
-            <input class="field" id="search" type="search" placeholder="Pesquisar por tecnologia, escopo ou plataforma">
-            <select class="field" id="category">
-              <option value="">Todas categorias</option>
-              <option>Power BI</option>
-              <option>Python</option>
-              <option>Full Stack</option>
-              <option>Automacao</option>
-            </select>
+      <section class="product" aria-label="Visual do produto">
+        <div class="board">
+          <div class="board-head">
+            <span>Dashboard de oportunidades</span>
+            <span class="status">pipeline pronto</span>
           </div>
-          <div class="list" id="project-list"></div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <strong>Revisao da oportunidade</strong>
-            <span class="chip" id="selected-platform">-</span>
-          </div>
-          <div class="detail">
-            <div class="content">
-              <h2 class="selected-title" id="selected-title"></h2>
-              <div class="meta" id="selected-tags"></div>
-
-              <section class="section">
-                <h2>Diagnostico</h2>
-                <p class="text" id="diagnostic"></p>
-              </section>
-
-              <section class="section">
-                <h2>Entregaveis</h2>
-                <ul class="deliverables" id="deliverables"></ul>
-              </section>
-
-              <section class="section">
-                <h2>Proposta para enviar</h2>
-                <textarea class="proposal-box" id="proposal"></textarea>
-              </section>
-            </div>
-
-            <aside class="aside">
-              <h2>Estimativa</h2>
-              <div class="big-price" id="price"></div>
-              <div class="metric-grid">
-                <div class="metric"><span>Horas</span><strong id="hours"></strong></div>
-                <div class="metric"><span>Prazo</span><strong id="timeline"></strong></div>
-                <div class="metric"><span>Confianca</span><strong id="confidence"></strong></div>
-                <div class="metric"><span>Risco</span><strong id="risk"></strong></div>
+          <div class="cards">
+            <article class="opp">
+              <div class="score">92</div>
+              <div>
+                <strong>Dashboard Power BI para vendas</strong>
+                <div class="chips"><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">escopo medio</span></div>
               </div>
-              <section class="section">
-                <h2>Status</h2>
-                <select class="field status-select" id="status-select">
-                  <option value="proposta_gerada">Pendente</option>
-                  <option value="enviado">Enviado</option>
-                  <option value="respondeu">Respondeu</option>
-                  <option value="em_andamento">Em andamento</option>
-                  <option value="finalizado">Finalizado</option>
-                  <option value="perdido">Perdido</option>
-                </select>
-              </section>
-              <section class="section">
-                <h2>Perguntas de escopo</h2>
-                <ul class="deliverables" id="questions"></ul>
-              </section>
-            </aside>
+              <div class="money">R$ 2.400<small>27h</small></div>
+            </article>
+            <article class="opp">
+              <div class="score">84</div>
+              <div>
+                <strong>Automacao Python com integracao de API</strong>
+                <div class="chips"><span class="chip">Python</span><span class="chip">API</span><span class="chip">logs</span></div>
+              </div>
+              <div class="money">R$ 2.900<small>30h</small></div>
+            </article>
+            <article class="opp">
+              <div class="score">78</div>
+              <div>
+                <strong>Aplicacao interna com dashboard</strong>
+                <div class="chips"><span class="chip">Flask</span><span class="chip">SQLite</span><span class="chip">PDF</span></div>
+              </div>
+              <div class="money">R$ 4.500<small>78h</small></div>
+            </article>
           </div>
         </div>
+        <aside class="summary">
+          <small>Proposta gerada</small>
+          <h2>R$ 2.400</h2>
+          <div class="summary-grid">
+            <div>Prazo: 5 a 8 dias</div>
+            <div>Confianca: 95%</div>
+            <div>Risco: medio</div>
+            <div>Saida: PDF</div>
+          </div>
+        </aside>
       </section>
-
-      <div class="console" id="console" aria-live="polite"></div>
     </main>
   </div>
-  <div class="toast" id="toast">Copiado</div>
 
-  <script>
-    const projects = [
-      {
-        id: "p1",
-        title: "Dashboard Power BI para acompanhamento de vendas",
-        platform: "Workana",
-        category: "Power BI",
-        status: "proposta_gerada",
-        score: 92,
-        price: 2400,
-        hours: 27,
-        timeline: "5 a 8 dias",
-        confidence: "95%",
-        risk: "medio",
-        tags: ["Power BI", "DAX", "ETL", "validar escopo"],
-        diagnostic: "Projeto com aderencia alta: o cliente precisa consolidar dados comerciais, criar indicadores e entregar uma visao executiva para tomada de decisao. O ponto de atencao e validar origem dos dados, volume historico e regras de metas.",
-        deliverables: ["Modelo de dados tratado e documentado", "Dashboard com KPIs de vendas, metas e funil", "Medidas DAX para receita, conversao e ticket medio", "Publicacao orientada para atualizacao recorrente"],
-        questions: ["As bases estao em Excel, sistema interno ou banco de dados?", "Quais KPIs sao obrigatorios para a primeira versao?", "Existe identidade visual ou modelo de dashboard atual?"],
-        proposal: "Ola! Consigo te ajudar com esse dashboard em Power BI estruturando a base, criando o modelo de dados e montando uma visao clara para acompanhamento de vendas.\n\nMinha sugestao e comecar validando as fontes de dados e os KPIs obrigatorios. Depois organizo o ETL, crio as medidas DAX e entrego uma primeira versao navegavel para revisao.\n\nEstimativa inicial: R$ 2.400 para aproximadamente 27 horas, com prazo de 5 a 8 dias apos confirmacao do escopo e acesso aos dados."
-      },
-      {
-        id: "p2",
-        title: "Automacao Python para integrar API e gerar relatorios",
-        platform: "99Freelas",
-        category: "Python",
-        status: "enviado",
-        score: 86,
-        price: 2900,
-        hours: 30,
-        timeline: "1 a 2 semanas",
-        confidence: "88%",
-        risk: "medio",
-        tags: ["Python", "API", "relatorios", "logs"],
-        diagnostic: "Boa oportunidade para automacao local: envolve consumo de API, transformacao de dados e geracao de saidas recorrentes. O risco principal esta em limites da API e detalhes de autenticacao.",
-        deliverables: ["Script Python parametrizavel", "Integracao autenticada com API", "Relatorio final em planilha ou CSV", "Logs de execucao e tratamento de erros"],
-        questions: ["A API possui documentacao e ambiente de testes?", "Qual frequencia de execucao esperada?", "O relatorio final precisa seguir algum layout especifico?"],
-        proposal: "Ola! Posso desenvolver a automacao em Python para buscar os dados na API, tratar as informacoes e gerar os relatorios no formato combinado.\n\nEu normalmente entrego esse tipo de fluxo com parametros claros, logs e tratamento de erro para facilitar manutencao. Antes de fechar, preciso confirmar a documentacao da API, autenticacao e formato final do relatorio.\n\nEstimativa inicial: R$ 2.900 para cerca de 30 horas, com prazo de 1 a 2 semanas."
-      },
-      {
-        id: "p3",
-        title: "Aplicacao interna com cadastro, dashboard e PDF",
-        platform: "Freelancer.com",
-        category: "Full Stack",
-        status: "respondeu",
-        score: 78,
-        price: 4500,
-        hours: 78,
-        timeline: "2 a 3 semanas",
-        confidence: "76%",
-        risk: "alto",
-        tags: ["Flask", "SQLite", "PDF", "dashboard"],
-        diagnostic: "Projeto maior, com produto interno completo. O escopo precisa ser fechado por modulo para evitar crescimento de requisitos. A oportunidade e boa se o cliente aceitar faseamento.",
-        deliverables: ["CRUD principal com validacoes", "Dashboard operacional", "Geracao de PDF padronizado", "Banco local e instrucoes de execucao"],
-        questions: ["Quantos tipos de usuario existem?", "Quais telas sao indispensaveis no MVP?", "O PDF tem modelo definido?"],
-        proposal: "Ola! Consigo construir uma primeira versao da aplicacao interna com cadastro, dashboard e geracao de PDF.\n\nPara manter prazo e custo sob controle, recomendo dividir em MVP: primeiro fluxo principal, depois relatorios e ajustes. Assim voce consegue testar rapidamente e evoluir com base no uso real.\n\nEstimativa inicial: R$ 4.500 para aproximadamente 78 horas, com prazo de 2 a 3 semanas apos definicao das telas essenciais."
-      },
-      {
-        id: "p4",
-        title: "Robo para organizar planilhas e enviar alertas",
-        platform: "Workana",
-        category: "Automacao",
-        status: "proposta_gerada",
-        score: 74,
-        price: 1800,
-        hours: 18,
-        timeline: "4 a 6 dias",
-        confidence: "91%",
-        risk: "baixo",
-        tags: ["Excel", "Python", "alertas"],
-        diagnostic: "Escopo direto: limpar planilhas, consolidar dados e disparar alertas conforme regras. Bom encaixe para automacao rapida com alto valor operacional.",
-        deliverables: ["Leitura e consolidacao de planilhas", "Regras de alerta configuraveis", "Arquivo final atualizado automaticamente", "Manual curto de uso"],
-        questions: ["As planilhas seguem sempre o mesmo padrao?", "Os alertas serao por e-mail, WhatsApp ou outro canal?", "Quem vai executar a rotina?"],
-        proposal: "Ola! Posso automatizar esse processo para reduzir o trabalho manual com as planilhas e gerar alertas com base nas regras que voce definir.\n\nA entrega incluiria leitura dos arquivos, consolidacao, validacoes e uma rotina simples para execucao recorrente.\n\nEstimativa inicial: R$ 1.800 para cerca de 18 horas, com prazo de 4 a 6 dias."
-      }
-    ];
+  <section class="section">
+    <div class="wrap">
+      <h2>O que demonstra</h2>
+      <div class="grid">
+        <div class="item">
+          <strong>Produto completo</strong>
+          <p>O projeto nao para no script: tem dashboard, banco local, status, copia de propostas e download de PDF.</p>
+        </div>
+        <div class="item">
+          <strong>IA com controle</strong>
+          <p>A IA apoia o texto, enquanto pricing, regras comerciais e validacoes preservam previsibilidade.</p>
+        </div>
+        <div class="item">
+          <strong>Base profissional</strong>
+          <p>Os arquivos YAML tornam servicos, portfolio, tecnologias e estilo editaveis sem mexer no codigo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const labels = {
-      proposta_gerada: "Pendente",
-      enviado: "Enviado",
-      respondeu: "Respondeu",
-      em_andamento: "Em andamento",
-      finalizado: "Finalizado",
-      perdido: "Perdido"
-    };
+  <section class="section" id="screenshots">
+    <div class="wrap">
+      <h2>Screenshots</h2>
+      <div class="screens">
+        <div class="screen"><img src="images/dashboard.png" alt="Dashboard de oportunidades"></div>
+        <div class="screen"><img src="images/detail.png" alt="Detalhe de proposta"></div>
+        <div class="screen"><img src="images/proposal.png" alt="Proposta estruturada"></div>
+        <div class="screen"><img src="images/pdf.png" alt="PDF comercial gerado"></div>
+      </div>
+    </div>
+  </section>
 
-    let currentStatus = "todos";
-    let selectedId = projects[0].id;
-
-    const money = value => value.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
-
-    function filteredProjects() {
-      const query = document.getElementById("search").value.trim().toLowerCase();
-      const category = document.getElementById("category").value;
-      return projects.filter(project => {
-        const statusOk = currentStatus === "todos" || project.status === currentStatus;
-        const categoryOk = !category || project.category === category;
-        const text = [project.title, project.platform, project.category, project.tags.join(" "), project.diagnostic].join(" ").toLowerCase();
-        return statusOk && categoryOk && (!query || text.includes(query));
-      });
-    }
-
-    function renderCounts() {
-      document.getElementById("count-todos").textContent = projects.length;
-      Object.keys(labels).forEach(status => {
-        const node = document.getElementById(`count-${status}`);
-        if (node) node.textContent = projects.filter(p => p.status === status).length;
-      });
-      const qualified = projects.filter(p => !["perdido"].includes(p.status));
-      const total = qualified.reduce((sum, p) => sum + p.price, 0);
-      const avgScore = Math.round(projects.reduce((sum, p) => sum + p.score, 0) / projects.length);
-      document.getElementById("kpi-found").textContent = projects.length;
-      document.getElementById("kpi-qualified").textContent = qualified.length;
-      document.getElementById("kpi-value").textContent = money(total);
-      document.getElementById("kpi-score").textContent = avgScore;
-    }
-
-    function renderList() {
-      const list = document.getElementById("project-list");
-      const items = filteredProjects();
-      document.getElementById("filtered-count").textContent = `${items.length} itens`;
-      list.innerHTML = "";
-      items.forEach(project => {
-        const button = document.createElement("button");
-        button.className = `project ${project.id === selectedId ? "active" : ""}`;
-        button.innerHTML = `
-          <div class="score ${project.score < 80 ? "mid" : ""}">${project.score}</div>
-          <div>
-            <div class="project-title">${project.title}</div>
-            <div class="meta">
-              <span class="chip">${project.platform}</span>
-              <span class="chip">${project.category}</span>
-              <span class="chip">${labels[project.status]}</span>
-              ${project.risk !== "baixo" ? '<span class="chip warn">validar</span>' : ""}
-            </div>
-          </div>
-          <div class="value">${money(project.price)}<small>${project.hours}h</small></div>
-        `;
-        button.addEventListener("click", () => selectProject(project.id));
-        list.appendChild(button);
-      });
-      if (!items.some(p => p.id === selectedId) && items[0]) selectProject(items[0].id, false);
-    }
-
-    function selectProject(id, rerenderList = true) {
-      selectedId = id;
-      const project = projects.find(p => p.id === selectedId);
-      if (!project) return;
-      document.getElementById("selected-title").textContent = project.title;
-      document.getElementById("selected-platform").textContent = project.platform;
-      document.getElementById("selected-tags").innerHTML = project.tags.map(tag => `<span class="chip">${tag}</span>`).join("");
-      document.getElementById("diagnostic").textContent = project.diagnostic;
-      document.getElementById("deliverables").innerHTML = project.deliverables.map(item => `<li><span class="check">ok</span><span>${item}</span></li>`).join("");
-      document.getElementById("questions").innerHTML = project.questions.map(item => `<li><span class="check">?</span><span>${item}</span></li>`).join("");
-      document.getElementById("proposal").value = project.proposal;
-      document.getElementById("price").textContent = money(project.price);
-      document.getElementById("hours").textContent = `${project.hours}h`;
-      document.getElementById("timeline").textContent = project.timeline;
-      document.getElementById("confidence").textContent = project.confidence;
-      document.getElementById("risk").textContent = project.risk;
-      document.getElementById("status-select").value = project.status;
-      if (rerenderList) renderList();
-    }
-
-    function showToast(text) {
-      const toast = document.getElementById("toast");
-      toast.textContent = text;
-      toast.classList.add("show");
-      setTimeout(() => toast.classList.remove("show"), 1800);
-    }
-
-    function copyProposal() {
-      const text = document.getElementById("proposal").value;
-      navigator.clipboard.writeText(text).then(() => showToast("Proposta copiada"));
-    }
-
-    function runScan() {
-      const consoleEl = document.getElementById("console");
-      const btn = document.getElementById("scan-btn");
-      const lines = [
-        "[workana] 18 oportunidades encontradas",
-        "[99freelas] 11 oportunidades encontradas",
-        "[matcher] score minimo aplicado: 70",
-        "[pricing] estimativas recalculadas",
-        "[proposal] propostas prontas para revisao humana"
-      ];
-      consoleEl.classList.add("open");
-      consoleEl.textContent = "";
-      btn.disabled = true;
-      btn.textContent = "Varrendo...";
-      lines.forEach((line, index) => {
-        setTimeout(() => {
-          consoleEl.textContent += `${line}\n`;
-          if (index === lines.length - 1) {
-            btn.disabled = false;
-            btn.textContent = "Nova varredura";
-            showToast("Varredura simulada concluida");
-          }
-        }, 420 * (index + 1));
-      });
-    }
-
-    document.querySelectorAll(".nav button").forEach(button => {
-      button.addEventListener("click", () => {
-        currentStatus = button.dataset.status;
-        document.querySelectorAll(".nav button").forEach(b => b.classList.remove("active"));
-        button.classList.add("active");
-        renderList();
-      });
-    });
-
-    document.getElementById("search").addEventListener("input", renderList);
-    document.getElementById("category").addEventListener("change", renderList);
-    document.getElementById("copy-btn").addEventListener("click", copyProposal);
-    document.getElementById("scan-btn").addEventListener("click", runScan);
-    document.getElementById("status-select").addEventListener("change", event => {
-      const project = projects.find(p => p.id === selectedId);
-      project.status = event.target.value;
-      renderCounts();
-      renderList();
-      showToast(`Status alterado para ${labels[project.status]}`);
-    });
-
-    renderCounts();
-    selectProject(selectedId);
-  </script>
+  <footer>
+    <div class="wrap">
+      FreelanceBot AI - Python, Flask, Playwright, Groq, SQLite e pytest.
+    </div>
+  </footer>
 </body>
 </html>
