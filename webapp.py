@@ -115,16 +115,8 @@ def get_stats():
             "SELECT AVG(match_score) a FROM projects WHERE status = 'proposta_gerada'"
         ).fetchone()
 
-        valor_row = conn.execute(
-            """
-            SELECT SUM(suggested_price_brl) total
-            FROM projects
-            WHERE status IN ('proposta_gerada', 'enviado', 'respondeu', 'em_andamento')
-            """
-        ).fetchone()
-
     stats["avg_score"] = round(avg_row["a"], 1) if avg_row["a"] else 0.0
-    stats["valor_potencial"] = round(valor_row["total"] or 0, 2)
+    stats["valor_potencial"] = 0.0
 
     return stats
 
@@ -233,10 +225,12 @@ def build_project_view_model(project):
         intelligence = build_proposal_intelligence(project)
         strategy = build_commercial_strategy(project, intelligence, knowledge)
         pricing = calculate_pricing(project, intelligence, strategy, knowledge)
-        if project.get("suggested_price_brl") not in (None, ""):
-            pricing["suggested_price_brl"] = _safe_money(project.get("suggested_price_brl"))
-        if project.get("estimated_hours") not in (None, ""):
-            pricing["estimated_hours"] = _safe_int(project.get("estimated_hours"))
+        stored_price = _safe_money(project.get("suggested_price_brl"))
+        stored_hours = _safe_int(project.get("estimated_hours"))
+        if stored_price > 0:
+            pricing["suggested_price_brl"] = stored_price
+        if stored_hours > 0:
+            pricing["estimated_hours"] = stored_hours
         proposal = generate_proposal(project, intelligence, strategy, pricing, knowledge)
         if project.get("proposal_text"):
             proposal["proposal_text"] = project["proposal_text"]
@@ -285,6 +279,8 @@ def _enrich(rows):
             {
                 "category": view["intelligence"].get("category", ""),
                 "complexity": view["intelligence"].get("complexity", ""),
+                "suggested_price_brl": view["pricing"].get("suggested_price_brl", 0.0),
+                "estimated_hours": view["pricing"].get("estimated_hours", 0),
                 "timeline_summary": view["project"].get("timeline_summary", ""),
                 "pricing_confidence": view["pricing"].get("confidence", 0.0),
                 "requires_scope_validation": view["pricing"].get("requires_scope_validation", False),
@@ -352,10 +348,16 @@ def dashboard():
     with scan_lock:
         running = scan_state["running"]
 
+    stats = get_stats()
+    stats["valor_potencial"] = round(
+        sum(_safe_money(p.get("suggested_price_brl")) for p in projetos),
+        2,
+    )
+
     return render_template(
         "dashboard.html",
         projetos=projetos,
-        stats=get_stats(),
+        stats=stats,
         running=running,
         status_atual=status,
         status_labels=STATUS_LABELS,
@@ -376,10 +378,17 @@ def api_projetos():
     if status not in STATUS_PERMITIDOS and status != "todos":
         status = "proposta_gerada"
 
+    projetos = list_projects(status)
+    stats = get_stats()
+    stats["valor_potencial"] = round(
+        sum(_safe_money(p.get("suggested_price_brl")) for p in projetos),
+        2,
+    )
+
     return jsonify({
         "ok": True,
-        "projetos": list_projects(status),
-        "stats": get_stats(),
+        "projetos": projetos,
+        "stats": stats,
     })
 
 

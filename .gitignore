@@ -18,11 +18,14 @@ freelance_bot.db
 # Browser profiles and scraper dumps
 .browser_profiles/
 .chrome_cdp_profile/
+.chrome_bot_profile/
 *_dump.html
 *_sem_cards.html
 
 # Generated artifacts
 artifacts/
+logs/
+scheduled_run.log
 
 # OS/editor
 .DS_Store

@@ -131,7 +131,7 @@ def _extract_projects(page: Page) -> list[Project]:
     return projects
 
 
-def scrape_freelancer(mode: str = "cdp") -> list[Project]:
+def scrape_freelancer(mode: str = "auto") -> list[Project]:
     all_projects: list[Project] = []
     last_error = None
 

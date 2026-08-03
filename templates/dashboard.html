@@ -169,9 +169,10 @@
 </style>
 </head>
 <body>
-{% set found_count = stats.proposta_gerada + stats.enviado + stats.respondeu + stats.em_andamento + stats.finalizado + stats.perdido %}
-{% set qualified_count = stats.proposta_gerada + stats.enviado + stats.respondeu + stats.em_andamento %}
-{% set avg_value = (stats.valor_potencial / qualified_count) if qualified_count else 0 %}
+{% set displayed_count = projetos|length %}
+{% set found_count = displayed_count %}
+{% set qualified_count = displayed_count %}
+{% set avg_value = (stats.valor_potencial / displayed_count) if displayed_count else 0 %}
 <div class="shell">
   <header class="topbar">
     <div class="brand">

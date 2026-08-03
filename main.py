@@ -20,6 +20,10 @@ from rich.panel import Panel
 import db
 from matcher import load_profile, filter_relevant
 from ai_engine import analyze_project
+from commercial_strategy import build_commercial_strategy
+from knowledge_engine import load_knowledge
+from pricing_engine import calculate_pricing
+from proposal_intelligence import build_proposal_intelligence
 from scrapers import scrape_workana, scrape_99freelas, scrape_freelancer
 
 load_dotenv()
@@ -29,6 +33,7 @@ console = Console()
 def run_pipeline(plataformas: list[str], min_score: float):
     db.init_db()
     profile = load_profile()
+    knowledge = load_knowledge()
 
     all_projects = []
     if "workana" in plataformas:
@@ -72,12 +77,23 @@ def run_pipeline(plataformas: list[str], min_score: float):
             db.mark_status(project.id, "descartado")
             continue
 
+        price_brl = float(result.get("valor_sugerido_brl") or 0)
+        estimated_hours = float(result.get("estimativa_horas") or 0)
+        reasoning = result.get("motivo_curto", "")
+        if price_brl <= 0 or estimated_hours <= 0:
+            intelligence = build_proposal_intelligence(project)
+            strategy = build_commercial_strategy(project, intelligence, knowledge)
+            pricing = calculate_pricing(project, intelligence, strategy, knowledge)
+            price_brl = float(pricing["suggested_price_brl"])
+            estimated_hours = float(pricing["estimated_hours"])
+            reasoning = pricing["pricing_reason"]
+
         db.save_ai_result(
             project.id,
             result.get("proposta_texto", ""),
-            result.get("valor_sugerido_brl", 0),
-            result.get("estimativa_horas", 0),
-            result.get("motivo_curto", ""),
+            price_brl,
+            estimated_hours,
+            reasoning,
         )
         novos += 1
         time.sleep(1)  # não estourar rate limit do Groq

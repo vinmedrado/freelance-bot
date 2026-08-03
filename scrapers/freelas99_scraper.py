@@ -198,7 +198,7 @@ def _extract_projects(page: Page) -> list[Project]:
     return projects
 
 
-def scrape_99freelas(mode: str = "cdp") -> list[Project]:
+def scrape_99freelas(mode: str = "auto") -> list[Project]:
     all_projects: list[Project] = []
     last_error: Exception | None = None
 

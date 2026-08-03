@@ -54,7 +54,7 @@ class PersistentScraper:
                     self._pw.stop()
                     raise RuntimeError(
                         f"Não consegui conectar no Chrome em {cdp_url}. "
-                        "Abra o Chrome com --remote-debugging-port=9222."
+                        "Abra o Chrome com --remote-debugging-port=9222 ou use mode='auto'."
                     ) from e
                 print("CDP indisponível. Abrindo perfil persistente...")
 
@@ -65,7 +65,12 @@ class PersistentScraper:
                 headless=self.headless,
                 viewport={"width": 1440, "height": 900},
                 locale="pt-BR",
-                args=["--disable-blink-features=AutomationControlled"],
+                args=[
+                    "--disable-blink-features=AutomationControlled",
+                    "--disable-gpu",
+                    "--disable-gpu-sandbox",
+                    "--disable-dev-shm-usage",
+                ],
             )
             self._page = (
                 self._context.pages[0]

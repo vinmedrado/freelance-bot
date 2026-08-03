@@ -206,6 +206,36 @@ Acesse:
 http://localhost:5050
 ```
 
+## Inicializacao automatica no Windows
+
+Para manter o dashboard sempre aberto ao ligar ou reiniciar o notebook:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install_autostart.ps1
+```
+
+O script inicia um watchdog que religa `webapp.py` se o processo cair. Se o
+Agendador de Tarefas negar permissao, ele cria automaticamente um atalho na
+pasta Startup do usuario.
+
+Para remover:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\uninstall_autostart.ps1
+```
+
+No notebook, acesse `http://127.0.0.1:5050`. No celular conectado ao mesmo Wi-Fi,
+use o IP do notebook, por exemplo `http://192.168.0.227:5050`.
+
+O dashboard nao precisa de aba do Chrome aberta. Para varreduras que usam login
+do navegador, o watchdog tenta manter um Chrome de automacao minimizado em
+`http://127.0.0.1:9222`, com perfil separado em `.chrome_bot_profile/`.
+
+Na aba `Todos`, projetos recem-coletados ainda sem proposta salva tambem recebem
+estimativa deterministica de valor e horas. Assim o painel evita `R$ 0` quando o
+banco ainda tem `suggested_price_brl` vazio, mas o escopo ja permite calcular uma
+faixa inicial.
+
 ## Screenshots
 
 ![Landing](docs/images/landing.png)

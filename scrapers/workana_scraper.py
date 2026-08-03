@@ -269,7 +269,7 @@ def _extract_projects(
 
 def scrape_workana(
     max_pages: int = 3,
-    mode: str = "cdp",
+    mode: str = "auto",
 ) -> list[Project]:
     all_projects: list[Project] = []
     seen_ids: set[str] = set()
