@@ -1,0 +1,43 @@
+pipeline:
+  - "extrair problema principal"
+  - "identificar categoria"
+  - "detectar tecnologias citadas"
+  - "avaliar aderência"
+  - "selecionar até dois cases"
+  - "selecionar resultados profissionais relacionados"
+  - "definir complexidade"
+  - "calcular preço"
+  - "gerar proposta"
+
+pontuacao:
+  skill_exata: 15
+  categoria_relacionada: 10
+  case_semelhante: 12
+  experiencia_corporativa_relacionada: 8
+  tecnologia_secundaria: 4
+  prazo_inviavel: -25
+  skill_bloqueada: -100
+  escopo_vago: -10
+
+limiares:
+  excelente: 70
+  bom: 50
+  avaliar: 30
+  descartar: 0
+
+regras_de_case:
+  - "Selecionar no máximo dois projetos"
+  - "Priorizar semelhança de problema antes de semelhança de tecnologia"
+  - "Não citar projeto apenas porque usa a mesma linguagem"
+  - "Usar link direto somente quando a demonstração estiver disponível"
+  - "Dizer que é projeto autoral ou estudo de caso quando aplicável"
+
+skills_bloqueio:
+  - "wordpress"
+  - "php puro"
+  - "joomla"
+  - "flutter"
+  - "ios nativo"
+  - "android nativo"
+  - "design gráfico"
+  - "redação pura"

@@ -1,0 +1,61 @@
+tecnologias:
+  linguagem_e_dados:
+    - "Python"
+    - "SQL"
+    - "Pandas"
+    - "NumPy"
+
+  business_intelligence:
+    - "Power BI"
+    - "DAX"
+    - "Power Query"
+    - "Excel"
+    - "VBA"
+
+  backend:
+    - "FastAPI"
+    - "REST API"
+    - "SQLAlchemy"
+    - "Alembic"
+    - "Celery"
+    - "Redis"
+    - "WebSocket"
+
+  frontend:
+    - "React"
+    - "TypeScript"
+    - "Vite"
+    - "Tailwind CSS"
+    - "Streamlit"
+
+  bancos:
+    - "PostgreSQL"
+    - "SQLite"
+    - "SQL Server"
+
+  automacao_e_coleta:
+    - "Selenium"
+    - "Playwright"
+    - "BeautifulSoup"
+    - "Requests"
+    - "Aiohttp"
+    - "Asyncio"
+
+  machine_learning:
+    - "Scikit-learn"
+    - "XGBoost"
+    - "LightGBM"
+    - "Random Forest"
+
+  infraestrutura:
+    - "Docker"
+    - "Docker Compose"
+    - "Git"
+    - "GitHub Actions"
+    - "Netlify"
+    - "GitHub Pages"
+
+  desktop:
+    - "PyQt6"
+    - "CustomTkinter"
+    - "PyInstaller"

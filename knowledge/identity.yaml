@@ -1,0 +1,30 @@
+nome: "Vinicius Medrado"
+nome_profissional: "Vinicius Medrado"
+
+titulo_principal: "Especialista em Automacao de Processos, Dados e Solucoes Python"
+
+titulos_alternativos:
+  - "Analista de Automacao de Processos e Engenharia de Dados"
+  - "Analista de Dados e Automacao"
+  - "Desenvolvedor de Solucoes em Python e Dados"
+
+tagline: >
+  Transformo processos manuais e dados dispersos em automacoes,
+  sistemas e analises organizadas, confiaveis e faceis de manter.
+
+posicionamento: >
+  Profissional com experiencia corporativa e projetos autorais completos,
+  atuando na criacao de automacoes, pipelines de dados, dashboards,
+  APIs, aplicacoes desktop e plataformas full stack.
+
+localizacao: "Brasil"
+
+idiomas:
+  portugues: "nativo"
+  ingles: "tecnico para leitura de documentacao e codigo"
+  espanhol: "basico"
+
+links:
+  portfolio: "https://vinmedrado.github.io/portfolio/"
+  github: "https://github.com/vinmedrado"
+  linkedin: "https://linkedin.com/in/viniciusmedrado"

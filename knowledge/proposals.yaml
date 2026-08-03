@@ -1,0 +1,63 @@
+regras_gerais:
+  - "A proposta deve ser personalizada para o projeto"
+  - "Não inventar experiência, resultados ou tecnologias"
+  - "Não citar empresa corporativa quando não houver relação com o projeto"
+  - "Não usar mais de dois projetos como prova"
+  - "Não enviar link sem relevância direta"
+  - "Não prometer prazo antes de considerar complexidade"
+
+campos_obrigatorios:
+  - "entendimento"
+  - "abordagem"
+  - "entregaveis"
+  - "prazo_estimado"
+  - "valor_sugerido"
+  - "proximo_passo"
+
+modelo_base:
+  abertura: >
+    Olá! Analisei o escopo e entendi que a necessidade principal é
+    {problema_principal}.
+  abordagem: >
+    Minha proposta é {solucao_resumida}, com foco em {prioridades}.
+  entregaveis:
+    - "{entregavel_1}"
+    - "{entregavel_2}"
+    - "{entregavel_3}"
+  experiencia: >
+    {experiencia_relevante}
+  encerramento: >
+    Posso validar os detalhes do escopo com você e, a partir disso,
+    organizar o início do projeto.
+
+adaptacao_por_categoria:
+  excel:
+    destacar:
+      - "organização"
+      - "facilidade de uso"
+      - "validação"
+      - "automação"
+  power_bi:
+    destacar:
+      - "modelagem"
+      - "indicadores"
+      - "DAX"
+      - "Power Query"
+  python:
+    destacar:
+      - "automação"
+      - "tratamento de erros"
+      - "logs"
+      - "manutenção"
+  api:
+    destacar:
+      - "contratos"
+      - "autenticação"
+      - "documentação"
+      - "integração"
+  fullstack:
+    destacar:
+      - "experiência completa"
+      - "frontend"
+      - "backend"
+      - "banco de dados"

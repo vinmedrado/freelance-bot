@@ -1,0 +1,55 @@
+moeda: "BRL"
+
+# Valores demonstrativos para uso publico no portfolio.
+# Ajuste localmente conforme negociacao, disponibilidade e complexidade real.
+valor_hora:
+  minimo: 50
+  alvo: 85
+  maximo: 150
+
+multiplicadores:
+  complexidade:
+    baixa: 1.0
+    media: 1.25
+    alta: 1.6
+  urgencia:
+    normal: 1.0
+    ate_7_dias: 1.2
+    ate_3_dias: 1.5
+  risco:
+    baixo: 1.0
+    medio: 1.15
+    alto: 1.35
+
+faixas_por_tipo:
+  ajuste_excel:
+    minimo: 250
+    maximo: 900
+  planilha_automatizada:
+    minimo: 600
+    maximo: 2500
+  dashboard_power_bi:
+    minimo: 900
+    maximo: 4000
+  automacao_python:
+    minimo: 700
+    maximo: 5000
+  scraping:
+    minimo: 800
+    maximo: 4500
+  api_backend:
+    minimo: 1500
+    maximo: 8000
+  aplicacao_fullstack:
+    minimo: 3500
+    maximo: 18000
+  aplicacao_desktop:
+    minimo: 1200
+    maximo: 7000
+
+regras:
+  - "Nunca sugerir valor abaixo do minimo do tipo de projeto"
+  - "Adicionar margem para reunioes, testes e correcoes"
+  - "Projetos com autenticacao, integracoes ou deploy tem risco maior"
+  - "Cobrar separadamente por manutencao continua"
+  - "Usar valor fechado apenas quando o escopo estiver suficientemente definido"

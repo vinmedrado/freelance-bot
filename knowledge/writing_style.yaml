@@ -1,0 +1,46 @@
+tom:
+  principal: "profissional, consultivo e direto"
+  caracteristicas:
+    - "humano"
+    - "claro"
+    - "seguro sem arrogância"
+    - "focado no problema do cliente"
+    - "sem exageros"
+
+sempre_fazer:
+  - "Demonstrar que o escopo foi compreendido"
+  - "Explicar de forma objetiva como o problema será resolvido"
+  - "Apresentar entregáveis"
+  - "Destacar apenas experiências realmente relacionadas"
+  - "Usar linguagem natural"
+  - "Finalizar com um próximo passo simples"
+
+evitar:
+  - "Sou apaixonado por tecnologia"
+  - "Tenho certeza absoluta"
+  - "Será um prazer imenso"
+  - "Sou o melhor profissional"
+  - "Texto genérico que serviria para qualquer projeto"
+  - "Listar tecnologias sem explicar utilidade"
+  - "Prometer resultado que depende de terceiros"
+  - "Copiar o texto do anúncio"
+
+limites:
+  tamanho_proposta_palavras:
+    min: 130
+    max: 260
+  quantidade_cases:
+    min: 0
+    max: 2
+  quantidade_tecnologias_citadas:
+    min: 2
+    max: 5
+
+estrutura_preferida:
+  - "Saudação breve"
+  - "Entendimento do projeto"
+  - "Solução proposta"
+  - "Entregáveis"
+  - "Experiência ou case relevante"
+  - "Prazo e alinhamento"
+  - "Próximo passo"

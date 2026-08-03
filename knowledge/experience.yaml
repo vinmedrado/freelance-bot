@@ -1,0 +1,55 @@
+resumo_profissional: >
+  Analista de Automacao de Processos e Engenharia de Dados com mais de
+  4 anos de experiencia em ambientes corporativos dos setores automotivo,
+  financeiro e operacional. Atua com Python, SQL, ETL, Power BI, Excel,
+  integracoes, automacao e desenvolvimento de solucoes internas.
+
+resultados_comprovados:
+  - descricao: "Reducao relevante de retrabalho operacional"
+    contexto: "Sistema interno com login, validacao de usuarios, dashboards e integracao com e-mail corporativo"
+  - descricao: "Reducao expressiva no tempo de execucao"
+    contexto: "Automacao de consolidacao de relatorios e envio de e-mails HTML para bases grandes de destinatarios"
+  - descricao: "Consulta reduzida de horas para segundos"
+    contexto: "Banco SQLite com cache local para consultas de alto volume"
+  - descricao: "Processamento mensal de milhares de documentos"
+    contexto: "Operacao corporativa com baixa margem de erro"
+
+experiencias:
+  - empresa: "Empresa global de servicos e tecnologia"
+    projeto_cliente: "Cliente corporativo do setor automotivo"
+    cargo: "Analista de Dados Pleno"
+    inicio: "2026-06"
+    atual: true
+    atividades:
+      - "Automacao de rotinas operacionais com Python"
+      - "Scrapers internos para extracao automatizada de dados"
+      - "Manutencao e evolucao de solucoes Power BI"
+      - "Tratamento, higienizacao e padronizacao de dados"
+      - "Ajustes em Dataflows, Power Query, modelos semanticos e medidas DAX"
+      - "Automacao de atualizacoes com Power Automate"
+
+  - empresa: "Empresa multinacional de BPO"
+    projeto_cliente: "Cliente corporativo do setor automotivo"
+    periodo: "2021-04 a 2026-02"
+    progressao:
+      - "Assistente Administrativo"
+      - "Analista Financeiro Junior"
+      - "Analista Financeiro Pleno"
+      - "Analista Administrativo"
+    atividades:
+      - "Pipelines ETL em Python, Power Query e SQL"
+      - "Dashboards para apoio a decisao"
+      - "Automacao de relatorios e e-mails"
+      - "Desenvolvimento de sistema interno"
+      - "Banco SQLite com cache em larga escala"
+      - "Processos financeiros e administrativos"
+
+  - empresa: "Empresa global de consultoria e tecnologia"
+    projeto_cliente: "Cliente corporativo do setor automotivo"
+    cargo: "Operador de Processos Senior"
+    periodo: "2020-04 a 2021-04"
+    atividades:
+      - "Controle de documentos"
+      - "Emissao de documentos fiscais"
+      - "Planilhas de controle em Excel"
+      - "Interface entre departamentos"

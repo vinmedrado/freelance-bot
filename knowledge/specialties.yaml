@@ -1,0 +1,71 @@
+especialidades:
+  automacao:
+    palavras_chave:
+      - "automação"
+      - "processo manual"
+      - "python"
+      - "script"
+      - "rotina"
+      - "whatsapp"
+      - "e-mail"
+    experiencias_relevantes:
+      - "Automação corporativa"
+      - "Envio automatizado"
+      - "Scraping"
+      - "Processamento de arquivos"
+
+  dados:
+    palavras_chave:
+      - "dados"
+      - "etl"
+      - "sql"
+      - "pandas"
+      - "limpeza"
+      - "tratamento"
+      - "pipeline"
+    experiencias_relevantes:
+      - "Pipelines ETL"
+      - "Validação de dados"
+      - "Bancos relacionais"
+      - "Engenharia de features"
+
+  business_intelligence:
+    palavras_chave:
+      - "power bi"
+      - "dashboard"
+      - "dax"
+      - "power query"
+      - "dataflow"
+      - "indicador"
+    experiencias_relevantes:
+      - "Manutenção de soluções Power BI"
+      - "Dashboards corporativos"
+      - "Modelagem e medidas DAX"
+
+  desenvolvimento:
+    palavras_chave:
+      - "fastapi"
+      - "react"
+      - "api"
+      - "sistema"
+      - "saas"
+      - "full stack"
+    experiencias_relevantes:
+      - "Lumyra"
+      - "Applymize"
+      - "Vinance"
+      - "Meu Carro Vale"
+      - "Marketplace Seller Platform"
+
+  machine_learning:
+    palavras_chave:
+      - "machine learning"
+      - "modelo"
+      - "previsão"
+      - "classificação"
+      - "xgboost"
+      - "lightgbm"
+    experiencias_relevantes:
+      - "Football Decision Lab"
+      - "Lotofácil Lab"
+      - "Marketplace Seller Platform"

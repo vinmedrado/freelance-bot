@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar - Central de oportunidades</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef1f4;
+    --panel: #ffffff;
+    --panel-subtle: #edeff2;
+    --line: #dde1e7;
+    --line-strong: #cfd5de;
+    --text: #111827;
+    --muted: #6b7280;
+    --muted-2: #98a2b3;
+    --brand: #111827;
+    --brand-soft: #1f2937;
+    --support: #0f4c5c;
+    --blue: #0f4c5c;
+    --gold: #c79a3b;
+    --gold-soft: #f3e7c6;
+    --green: #2f855a;
+    --orange: #b7791f;
+    --warning: #b7791f;
+    --red: #b03a2e;
+    --shadow: 0 18px 42px rgba(17, 24, 39, .12);
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 10% -10%, rgba(15,76,92,.18), transparent 360px),
+      linear-gradient(180deg, #e8edf1 0, #f5f6f8 420px, #eef1f4 100%);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+  }
+  a { color: inherit; }
+  button, select, input { font: inherit; }
+  .shell { max-width: 1240px; margin: 0 auto; padding: 22px 22px 56px; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    padding: 18px 20px; border: 1px solid rgba(255,255,255,.1); border-radius: 22px;
+    background:
+      linear-gradient(135deg, rgba(17,24,39,.98), rgba(15,76,92,.93)),
+      var(--brand);
+    box-shadow: 0 22px 60px rgba(17,24,39,.2); color: white; position: relative; overflow: hidden;
+  }
+  .topbar::after {
+    content: ""; position: absolute; inset: auto 22px 0 auto; width: 220px; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent); opacity: .85;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .brand-dot { width: 38px; height: 38px; border-radius: 12px; background: rgba(255,255,255,.08); position: relative; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }
+  .brand-dot::before { content: ""; position: absolute; inset: 9px; border: 1px solid rgba(255,255,255,.28); border-radius: 50%; }
+  .brand-dot::after { content: ""; position: absolute; width: 9px; height: 9px; border-radius: 50%; background: var(--gold); right: 7px; top: 7px; }
+  .brand h1 { margin: 0; font-size: 22px; line-height: 1.05; letter-spacing: -.035em; }
+  .brand p { margin: 3px 0 0; color: #cbd5e1; font-size: 13px; }
+  .top-actions { display: flex; align-items: center; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+  .scan-btn, .ghost-btn {
+    border: 1px solid var(--line-strong); background: var(--panel); color: var(--text);
+    border-radius: 9px; padding: 8px 12px; font-size: 13px; font-weight: 650; cursor: pointer;
+    transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+  }
+  .scan-btn { background: var(--gold); color: #111827; border-color: var(--gold); box-shadow: 0 10px 24px rgba(199,154,59,.24); }
+  .scan-btn:hover, .ghost-btn:hover { transform: translateY(-1px); border-color: #aab3c1; }
+  .scan-btn:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+  .chrome-pill { display: inline-flex; align-items: center; gap: 7px; color: #e5e7eb; font-size: 12px; padding: 7px 10px; border: 1px solid rgba(255,255,255,.12); border-radius: 999px; background: rgba(255,255,255,.08); }
+  .chrome-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--muted-2); }
+  .chrome-dot.on { background: var(--green); }
+  .chrome-dot.off { background: var(--red); }
+  .updated { color: #cbd5e1; font-size: 12px; }
+  .kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 13px; margin: 20px 0; }
+  .kpi { background: rgba(255,255,255,.92); border: 1px solid rgba(221,225,231,.9); border-radius: 18px; padding: 17px; box-shadow: 0 14px 34px rgba(17,24,39,.075); transition: transform .18s ease, box-shadow .18s ease; position: relative; overflow: hidden; }
+  .kpi::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 3px; background: linear-gradient(90deg, var(--support), transparent); opacity: .7; }
+  .kpi:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+  .kpi-top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+  .kpi-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 8px; background: #e6eef1; color: var(--support); }
+  .kpi-value { font-size: 28px; font-weight: 800; letter-spacing: -.045em; }
+  .tabs { display: flex; gap: 4px; overflow-x: auto; padding: 5px; background: rgba(17,24,39,.06); border: 1px solid var(--line); border-radius: 14px; margin-bottom: 12px; }
+  .tab { text-decoration: none; white-space: nowrap; color: var(--muted); font-size: 13px; font-weight: 600; padding: 8px 11px; border-radius: 9px; transition: background .16s ease, color .16s ease; }
+  .tab:hover { color: var(--text); }
+  .tab.active { background: var(--panel); color: var(--support); box-shadow: 0 1px 2px rgba(15,23,42,.08); }
+  .tab .count { color: var(--muted-2); margin-left: 5px; }
+  .filters { display: grid; grid-template-columns: 1.2fr repeat(4, minmax(120px, .5fr)) auto; gap: 8px; align-items: center; margin: 12px 0 14px; padding: 11px; border: 1px solid var(--line); border-radius: 16px; background: rgba(255,255,255,.45); backdrop-filter: blur(10px); }
+  .filter-input {
+    width: 100%; border: 1px solid var(--line); background: var(--panel); color: var(--text);
+    border-radius: 10px; padding: 9px 10px; font-size: 13px; outline: none; transition: border-color .16s ease, box-shadow .16s ease;
+  }
+  .filter-input:focus { border-color: var(--support); box-shadow: 0 0 0 3px rgba(15,76,92,.12); }
+  .filter-check { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .filter-link { color: var(--muted); font-size: 12px; text-decoration: none; }
+  details.log-wrap { margin: 8px 0 14px; }
+  details.log-wrap > summary { cursor: pointer; color: #f3f4f6; background: var(--brand-soft); border-radius: 12px; padding: 10px 12px; font-size: 13px; font-weight: 650; list-style: none; }
+  details.log-wrap > summary::-webkit-details-marker { display: none; }
+  .console {
+    margin-top: 9px; background: #090f1a; color: #cbd5e1; border-radius: 12px; padding: 14px;
+    font-family: var(--mono); font-size: 12px; line-height: 1.6; max-height: 240px; overflow: auto;
+  }
+  .console .line { white-space: pre-wrap; word-break: break-word; }
+  .grid { display: grid; gap: 8px; }
+  .project-card {
+    background: rgba(255,255,255,.94); border: 1px solid rgba(221,225,231,.95); border-left: 5px solid var(--support); border-radius: 16px; padding: 14px 15px;
+    display: grid; grid-template-columns: 42px minmax(220px, 1fr) auto auto; gap: 13px; align-items: center;
+    transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, opacity .18s ease;
+  }
+  .project-card:hover { transform: translateY(-1px); border-color: #cbd5e1; box-shadow: var(--shadow); }
+  .project-card.removing { opacity: 0; transform: scale(.985); }
+  .score { width: 42px; height: 42px; border-radius: 14px; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; font-weight: 800; color: white; background: #9ca3af; box-shadow: inset 0 0 0 1px rgba(255,255,255,.18); }
+  .score.high { background: var(--green); }
+  .score.mid { background: var(--gold); color: #111827; }
+  .title-line { display: flex; align-items: center; gap: 8px; min-width: 0; }
+  .project-title { font-size: 15px; font-weight: 760; letter-spacing: -.02em; text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .project-title:hover { color: var(--support); }
+  .meta { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  .chip { color: var(--muted); background: #eef1f4; border: 1px solid transparent; border-radius: 999px; padding: 3px 7px; font-size: 11.5px; font-weight: 600; }
+  .chip.status { color: #475467; }
+  .chip.warn { color: var(--warning); background: var(--gold-soft); }
+  .chip.platform { color: var(--support); background: #e6eef1; }
+  .money { text-align: right; min-width: 120px; }
+  .price { font-size: 17px; font-weight: 820; letter-spacing: -.03em; }
+  .sub { color: var(--muted); font-size: 12px; margin-top: 3px; }
+  .actions { display: flex; gap: 6px; align-items: center; justify-content: flex-end; flex-wrap: wrap; }
+  .action-btn {
+    border: 1px solid var(--line); background: #f8fafc; color: var(--text); border-radius: 9px;
+    padding: 7px 9px; font-size: 12px; font-weight: 650; cursor: pointer; text-decoration: none;
+    transition: background .16s ease, border-color .16s ease, transform .16s ease;
+  }
+  .action-btn:hover { background: #eef1f4; border-color: #cbd5e1; transform: translateY(-1px); }
+  .status-row { display: flex; gap: 4px; align-items: center; justify-content: flex-end; margin-top: 8px; }
+  .step, .link-action {
+    border: 0; background: transparent; color: var(--muted); cursor: pointer; padding: 3px 5px; border-radius: 6px;
+    font-size: 11px; font-weight: 600; transition: background .16s ease, color .16s ease;
+  }
+  .step:hover, .link-action:hover { background: #f3f5f8; color: var(--text); }
+  .step.current { color: var(--support); background: #e6eef1; }
+  .empty { background: var(--panel); border: 1px dashed var(--line-strong); border-radius: 14px; padding: 50px 20px; text-align: center; color: var(--muted); }
+  .empty-title { color: var(--text); font-weight: 700; margin-bottom: 5px; }
+  .toast-stack { position: fixed; right: 20px; bottom: 20px; z-index: 20; display: grid; gap: 8px; }
+  .toast { background: var(--brand); color: white; border-radius: 10px; padding: 10px 13px; font-size: 13px; opacity: 0; transform: translateY(6px); transition: opacity .18s ease, transform .18s ease; box-shadow: var(--shadow); }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast.error { background: var(--red); }
+  @media (max-width: 980px) {
+    .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .filters { grid-template-columns: 1fr 1fr; }
+    .project-card { grid-template-columns: 42px minmax(0, 1fr); }
+    .money, .actions-wrap { grid-column: 2; text-align: left; }
+    .actions, .status-row { justify-content: flex-start; }
+  }
+  @media (max-width: 640px) {
+    .shell { padding: 14px 12px 42px; }
+    .topbar { align-items: flex-start; }
+    .top-actions { width: 100%; justify-content: stretch; }
+    .scan-btn, .ghost-btn, .chrome-pill { flex: 1; justify-content: center; }
+    .kpis, .filters { grid-template-columns: 1fr; }
+    .project-card { grid-template-columns: 1fr; }
+    .score { width: 34px; height: 34px; }
+    .title-line { align-items: flex-start; }
+    .money, .actions-wrap { grid-column: auto; }
+    .project-title { white-space: normal; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; }
+    .action-btn { text-align: center; }
+  }
+</style>
+</head>
+<body>
+{% set found_count = stats.proposta_gerada + stats.enviado + stats.respondeu + stats.em_andamento + stats.finalizado + stats.perdido %}
+{% set qualified_count = stats.proposta_gerada + stats.enviado + stats.respondeu + stats.em_andamento %}
+{% set avg_value = (stats.valor_potencial / qualified_count) if qualified_count else 0 %}
+<div class="shell">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-dot" id="brand-mark"></div>
+      <div>
+        <h1>Radar</h1>
+        <p>Central de oportunidades</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="scan-btn" id="scan-btn" onclick="iniciarVarredura()" {{ 'disabled' if running else '' }}>{{ 'Varrendo...' if running else 'Nova varredura' }}</button>
+      <span class="chrome-pill"><span class="chrome-dot" id="chrome-dot"></span><span id="chrome-text">verificando Chrome...</span></span>
+      <button class="ghost-btn" id="chrome-btn" onclick="abrirChrome()" style="display:none;">Abrir Chrome</button>
+      <button class="ghost-btn" id="clear-db-btn" onclick="resetDatabase()">Limpar banco</button>
+      <span class="updated">Última atualização: agora</span>
+    </div>
+  </header>
+
+  <section class="kpis">
+    <div class="kpi"><div class="kpi-top"><span>Projetos encontrados</span><span class="kpi-icon">↗</span></div><div class="kpi-value">{{ found_count }}</div></div>
+    <div class="kpi"><div class="kpi-top"><span>Projetos qualificados</span><span class="kpi-icon">✓</span></div><div class="kpi-value">{{ qualified_count }}</div></div>
+    <div class="kpi"><div class="kpi-top"><span>Valor potencial</span><span class="kpi-icon">R$</span></div><div class="kpi-value">R$ {{ "%.0f"|format(stats.valor_potencial) }}</div></div>
+    <div class="kpi"><div class="kpi-top"><span>Valor médio</span><span class="kpi-icon">Ø</span></div><div class="kpi-value">R$ {{ "%.0f"|format(avg_value) }}</div></div>
+  </section>
+
+  <nav class="tabs">
+    <a class="tab {{ 'active' if status_atual == 'todos' else '' }}" href="/dashboard?status=todos">Todos</a>
+    {% for key, label in status_labels.items() %}
+      {% if key != 'descartado' %}
+        <a class="tab {{ 'active' if status_atual == key else '' }}" href="/dashboard?status={{ key }}">{{ label }}<span class="count">{{ stats[key] }}</span></a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+
+  <form class="filters" method="get">
+    <input type="hidden" name="status" value="{{ status_atual }}">
+    <input class="filter-input" id="search-input" type="search" placeholder="Pesquisar por texto..." oninput="filterCards()">
+    <select class="filter-input" name="categoria" onchange="this.form.submit()">
+      <option value="">Categoria</option>
+      {% for value in ['Excel', 'Power BI', 'Python', 'API', 'ETL', 'Dashboard', 'Automação', 'Web Scraping', 'Desktop', 'Full Stack', 'Machine Learning', 'Banco de Dados'] %}
+        <option value="{{ value }}" {{ 'selected' if filtros.categoria == value else '' }}>{{ value }}</option>
+      {% endfor %}
+    </select>
+    <select class="filter-input" name="complexidade" onchange="this.form.submit()">
+      <option value="">Complexidade</option>
+      <option value="low" {{ 'selected' if filtros.complexidade == 'low' else '' }}>Baixa</option>
+      <option value="medium" {{ 'selected' if filtros.complexidade == 'medium' else '' }}>Média</option>
+      <option value="high" {{ 'selected' if filtros.complexidade == 'high' else '' }}>Alta</option>
+    </select>
+    <select class="filter-input" name="plataforma" onchange="this.form.submit()">
+      <option value="">Plataforma</option>
+      <option value="workana" {{ 'selected' if filtros.plataforma == 'workana' else '' }}>Workana</option>
+      <option value="99freelas" {{ 'selected' if filtros.plataforma == '99freelas' else '' }}>99Freelas</option>
+      <option value="freelancer" {{ 'selected' if filtros.plataforma == 'freelancer' else '' }}>Freelancer</option>
+    </select>
+    <label class="filter-input filter-check"><input type="checkbox" name="validacao" value="1" onchange="this.form.submit()" {{ 'checked' if filtros.validacao == '1' else '' }}> Validação</label>
+    <a class="filter-link" href="/dashboard?status={{ status_atual }}">Limpar</a>
+  </form>
+
+  <details class="log-wrap" id="log-wrap" {{ 'open' if running else '' }}>
+    <summary>▼ Ver log da varredura</summary>
+    <div class="console" id="console"><div id="console-lines"></div></div>
+  </details>
+
+  {% if not projetos %}
+    <div class="empty"><div class="empty-title">Nenhuma oportunidade neste filtro</div><div>Tente outro status, ajuste filtros ou inicie uma nova varredura.</div></div>
+  {% endif %}
+
+  <main class="grid" id="grid">
+    {% set stage_order = {'enviado': 0, 'respondeu': 1, 'em_andamento': 2, 'finalizado': 3} %}
+    {% for p in projetos %}
+      {% set current_idx = stage_order.get(p.status, -1) %}
+      {% set score = (p.match_score or 0) | int %}
+      <article class="project-card" id="card-{{ p.id }}" data-search="{{ (p.title ~ ' ' ~ p.platform ~ ' ' ~ p.category ~ ' ' ~ p.ai_reasoning)|lower }}">
+        <div class="title-line">
+          <div class="score {{ 'high' if score >= 90 else 'mid' if score >= 70 else '' }}">{{ score }}</div>
+        </div>
+        <div>
+          <a class="project-title" href="/project/{{ p.id }}">{{ p.title }}</a>
+          <div class="meta">
+            <span class="chip platform">{{ p.platform }}</span>
+            {% if p.category %}<span class="chip">{{ p.category }}</span>{% endif %}
+            <span class="chip status">{{ status_labels[p.status] }}</span>
+            {% if p.requires_scope_validation %}<span class="chip warn">validar escopo</span>{% endif %}
+          </div>
+        </div>
+        <div class="money">
+          <div class="price">R$ {{ "%.0f"|format(p.suggested_price_brl or 0) }}</div>
+          <div class="sub">{{ p.estimated_hours or 0 }}h · {{ p.timeline_summary }}</div>
+        </div>
+        <div class="actions-wrap">
+          <div class="actions">
+            <button class="action-btn" onclick="copiarProposta('{{ p.id }}', 'short', this)">Curta</button>
+            <button class="action-btn" onclick="copiarProposta('{{ p.id }}', 'full', this)">Proposta</button>
+            <a class="action-btn" href="/api/proposal/{{ p.id }}/pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+            {% if p.url %}<a class="action-btn" href="{{ p.url }}" target="_blank" rel="noopener noreferrer">Abrir</a>{% endif %}
+          </div>
+          <div class="status-row">
+            {% for key, idx in [('enviado', 0), ('respondeu', 1), ('em_andamento', 2), ('finalizado', 3)] %}
+              <button class="step {{ 'current' if current_idx == idx else '' }}" onclick="alterarStatus('{{ p.id }}', '{{ key }}')">{{ status_labels[key] }}</button>
+            {% endfor %}
+            <button class="link-action" onclick="alterarStatus('{{ p.id }}', 'perdido')">perdido</button>
+          </div>
+        </div>
+      </article>
+    {% endfor %}
+  </main>
+</div>
+
+<div class="toast-stack" id="toast-stack"></div>
+
+<script>
+let pollOffset = 0;
+let pollTimer = null;
+
+function showToast(msg, isError) {
+  const stack = document.getElementById('toast-stack');
+  const toast = document.createElement('div');
+  toast.className = 'toast' + (isError ? ' error' : '');
+  toast.textContent = msg;
+  stack.appendChild(toast);
+  requestAnimationFrame(() => toast.classList.add('show'));
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 220);
+  }, 1800);
+}
+
+function writeClipboard(texto) {
+  if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(texto);
+  return new Promise((resolve, reject) => {
+    const area = document.createElement('textarea');
+    area.value = texto;
+    area.style.position = 'fixed';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    try { document.execCommand('copy') ? resolve() : reject(new Error('copy failed')); }
+    catch (err) { reject(err); }
+    finally { area.remove(); }
+  });
+}
+
+function copiarProposta(id, tipo, btn) {
+  const original = btn.textContent;
+  fetch(`/api/project/${id}/proposal`)
+    .then(r => r.json())
+    .then(data => {
+      if (!data.ok) throw new Error(data.error || 'Erro ao carregar proposta');
+      return writeClipboard(tipo === 'short' ? data.short_proposal_text : data.proposal_text);
+    })
+    .then(() => {
+      btn.textContent = 'Copiado';
+      showToast('Proposta copiada', false);
+      setTimeout(() => btn.textContent = original, 1400);
+    })
+    .catch(() => showToast('Não foi possível copiar', true));
+}
+
+function filterCards() {
+  const query = document.getElementById('search-input').value.trim().toLowerCase();
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.style.display = card.dataset.search.includes(query) ? '' : 'none';
+  });
+}
+
+function alterarStatus(id, status) {
+  fetch(`/api/status/${id}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status })
+  })
+  .then(r => r.json())
+  .then(data => {
+    if (!data.ok) return showToast(data.error || 'Erro ao alterar status', true);
+    showToast(`Marcado como ${data.label.toLowerCase()}`, false);
+    const card = document.getElementById('card-' + id);
+    if (card) card.classList.add('removing');
+    setTimeout(() => window.location.reload(), 520);
+  });
+}
+
+function iniciarVarredura() {
+  const btn = document.getElementById('scan-btn');
+  fetch('/api/scan/start', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.ok) return showToast(data.error || 'Erro ao iniciar varredura', true);
+      btn.disabled = true;
+      btn.textContent = 'Varrendo...';
+      document.getElementById('log-wrap').open = true;
+      pollOffset = 0;
+      document.getElementById('console-lines').innerHTML = '';
+      pollTimer = setInterval(pollScan, 700);
+    });
+}
+
+function pollScan() {
+  fetch(`/api/scan/poll?offset=${pollOffset}`)
+    .then(r => r.json())
+    .then(data => {
+      const linesEl = document.getElementById('console-lines');
+      data.lines.forEach(line => {
+        const div = document.createElement('div');
+        div.className = 'line';
+        div.textContent = line;
+        linesEl.appendChild(div);
+      });
+      pollOffset = data.offset;
+      if (!data.running) {
+        clearInterval(pollTimer);
+        showToast(data.returncode === 0 ? 'Varredura concluída' : 'A varredura falhou', data.returncode !== 0);
+        if (data.returncode === 0) setTimeout(() => window.location.reload(), 900);
+        else {
+          const btn = document.getElementById('scan-btn');
+          btn.disabled = false;
+          btn.textContent = 'Nova varredura';
+        }
+      }
+    });
+}
+
+function refreshChromeStatus() {
+  fetch('/api/chrome/status')
+    .then(r => r.json())
+    .then(data => {
+      const dot = document.getElementById('chrome-dot');
+      const text = document.getElementById('chrome-text');
+      const btn = document.getElementById('chrome-btn');
+      dot.className = 'chrome-dot ' + (data.connected ? 'on' : 'off');
+      text.textContent = data.connected ? 'Chrome conectado' : 'Chrome desconectado';
+      btn.style.display = data.connected ? 'none' : 'inline-block';
+    });
+}
+
+function abrirChrome() {
+  const btn = document.getElementById('chrome-btn');
+  btn.disabled = true;
+  btn.textContent = 'Abrindo...';
+  fetch('/api/chrome/start', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.ok) {
+        showToast(data.error || 'Não consegui abrir o Chrome', true);
+        btn.disabled = false;
+        btn.textContent = 'Abrir Chrome';
+        return;
+      }
+      showToast('Chrome iniciado', false);
+      setTimeout(() => { refreshChromeStatus(); btn.disabled = false; btn.textContent = 'Abrir Chrome'; }, 1600);
+    });
+}
+
+function resetDatabase() {
+  if (!confirm('Tem certeza que deseja apagar todos os registros do banco?')) return;
+  fetch('/api/db/reset', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.ok) return showToast(data.error || 'Erro ao apagar o banco', true);
+      showToast('Banco apagado', false);
+      window.location.reload();
+    });
+}
+
+refreshChromeStatus();
+{% if running %}pollTimer = setInterval(pollScan, 700);{% endif %}
+</script>
+</body>
+</html>

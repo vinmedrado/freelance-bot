@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ view.project.title }} - Radar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #eef1f4;
+    --panel: #fff;
+    --soft: #edeff2;
+    --line: #dde1e7;
+    --line-strong: #cfd5de;
+    --text: #111827;
+    --muted: #6b7280;
+    --muted-2: #98a2b3;
+    --brand: #111827;
+    --brand-soft: #1f2937;
+    --support: #0f4c5c;
+    --blue: #0f4c5c;
+    --gold: #c79a3b;
+    --gold-soft: #f3e7c6;
+    --green: #2f855a;
+    --orange: #b7791f;
+    --shadow: 0 18px 42px rgba(17,24,39,.12);
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: radial-gradient(circle at 8% -8%, rgba(15,76,92,.18), transparent 360px), linear-gradient(180deg, #e8edf1 0, #f5f6f8 430px, #eef1f4 100%); color: var(--text); font-family: var(--sans); }
+  a { color: inherit; }
+  button, select { font: inherit; }
+  button:focus-visible, a:focus-visible, select:focus-visible, summary:focus-visible {
+    outline: 3px solid rgba(15,76,92,.28);
+    outline-offset: 2px;
+  }
+  .shell { max-width: 1240px; margin: 0 auto; padding: 22px 22px 60px; }
+  .topbar { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 16px 18px; border: 1px solid rgba(255,255,255,.1); border-radius: 22px 22px 0 0; background: linear-gradient(135deg, rgba(17,24,39,.98), rgba(15,76,92,.93)); color: white; box-shadow: 0 22px 60px rgba(17,24,39,.2); position: relative; overflow: hidden; }
+  .topbar::after { content: ""; position: absolute; right: 22px; bottom: 0; width: 210px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .breadcrumb { color: #cbd5e1; text-decoration: none; font-size: 13px; font-weight: 650; }
+  .breadcrumb span { color: #94a3b8; margin: 0 6px; }
+  .top-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+  .btn {
+    border: 1px solid var(--line-strong); background: var(--panel); color: var(--text); border-radius: 9px;
+    padding: 8px 11px; font-weight: 650; cursor: pointer; text-decoration: none; font-size: 13px;
+    transition: transform .16s ease, border-color .16s ease, background .16s ease, box-shadow .16s ease;
+  }
+  .topbar .btn { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: white; }
+  .topbar .btn.primary { background: var(--gold); color: #111827; border-color: var(--gold); }
+  .btn.primary { background: var(--support); color: white; border-color: var(--support); }
+  .btn:hover { transform: translateY(-1px); border-color: #aab3c1; box-shadow: var(--shadow); }
+  .btn.copied { color: var(--green); border-color: rgba(22,163,74,.35); background: #ecfdf3; }
+  .project-head { padding: 22px 18px 24px; margin-bottom: 20px; border-radius: 0 0 22px 22px; background: linear-gradient(135deg, var(--brand), #17313a); color: white; box-shadow: 0 22px 60px rgba(17,24,39,.2); position: relative; overflow: hidden; }
+  .project-head::before { content: ""; position: absolute; right: -70px; top: -110px; width: 240px; height: 240px; border-radius: 50%; border: 1px solid rgba(199,154,59,.32); }
+  .project-head::after { content: ""; position: absolute; right: 28px; bottom: 0; width: 160px; height: 2px; background: linear-gradient(90deg, transparent, var(--gold)); }
+  .meta-line { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+  h1 { margin: 0; max-width: 900px; font-size: clamp(30px, 4vw, 46px); line-height: 1.02; letter-spacing: -.055em; position: relative; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 5px; color: var(--muted); background: #f3f5f8;
+    border-radius: 999px; padding: 4px 8px; font-size: 12px; font-weight: 650;
+  }
+  .project-head .chip { color: #e5e7eb; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.12); }
+  .chip.good { color: var(--green); background: #eaf6ef; }
+  .chip.warn { color: var(--orange); background: var(--gold-soft); }
+  .chip.blue { color: var(--support); background: #e6eef1; }
+  .score-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted-2); }
+  .score-dot.high { background: var(--green); }
+  .score-dot.mid { background: var(--orange); }
+  .project-head .chip.good, .project-head .chip.blue, .project-head .chip.warn { color: white; background: rgba(255,255,255,.13); }
+  .original-link { color: var(--blue); max-width: 260px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-decoration: none; }
+  .project-head .original-link { color: #f7d783; }
+  .layout { display: grid; grid-template-columns: minmax(0, 65fr) minmax(320px, 35fr); gap: 18px; align-items: start; }
+  .side { position: sticky; top: 18px; display: grid; gap: 12px; }
+  .panel {
+    background: rgba(255,255,255,.94); border: 1px solid rgba(221,225,231,.95); border-radius: 18px; padding: 18px;
+    box-shadow: 0 14px 34px rgba(17,24,39,.07);
+  }
+  .panel + .panel { margin-top: 12px; }
+  .panel.subtle { background: linear-gradient(180deg, #f7fbfc, #ffffff); border-color: #cddde1; box-shadow: inset 5px 0 0 rgba(15,76,92,.7), 0 14px 34px rgba(17,24,39,.07); }
+  h2 { margin: 0 0 13px; font-size: 15px; letter-spacing: -.02em; }
+  h3 { margin: 16px 0 8px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  .lead-title { margin: 0 0 8px; font-size: 22px; line-height: 1.2; letter-spacing: -.04em; font-weight: 800; }
+  .text { color: #344054; line-height: 1.65; font-size: 14px; white-space: pre-wrap; margin: 0 0 10px; }
+  .muted { color: var(--muted); line-height: 1.6; font-size: 14px; }
+  .diagnostic-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; margin: 12px 0; }
+  .mini-card { border: 1px solid var(--line); background: #f5f6f8; border-radius: 14px; padding: 12px; }
+  .mini-label { color: var(--muted); font-size: 12px; margin-bottom: 7px; }
+  .mini-value { font-weight: 760; letter-spacing: -.02em; }
+  .confidence-bar { height: 7px; border-radius: 999px; background: #e5e7eb; overflow: hidden; margin-top: 8px; }
+  .confidence-fill { height: 100%; background: var(--support); border-radius: inherit; }
+  .check-list, .plain-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .check-list li, .plain-list li { display: flex; gap: 9px; align-items: flex-start; color: #344054; font-size: 14px; line-height: 1.45; }
+  .mark { width: 18px; height: 18px; border-radius: 50%; display: inline-grid; place-items: center; flex: 0 0 auto; background: #eaf6ef; color: var(--green); font-size: 12px; font-weight: 800; }
+  .dash-mark { width: 18px; height: 18px; border-radius: 6px; flex: 0 0 auto; background: #f3f5f8; border: 1px solid var(--line); position: relative; }
+  .dash-mark::after { content: ""; position: absolute; left: 5px; right: 5px; top: 8px; height: 2px; background: var(--muted-2); border-radius: 2px; }
+  .method { display: grid; gap: 11px; }
+  .method-step { display: grid; grid-template-columns: 28px 1fr; gap: 10px; }
+  .step-no { width: 30px; height: 30px; border-radius: 50%; background: var(--support); color: white; display: grid; place-items: center; font-family: var(--mono); font-size: 12px; box-shadow: 0 0 0 4px #e6eef1; }
+  .step-name { font-weight: 720; margin-bottom: 3px; }
+  .timeline-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+  .timeline-item { border: 1px solid var(--line); background: #f5f6f8; border-radius: 12px; padding: 11px; }
+  .timeline-phase { font-weight: 720; margin-bottom: 5px; }
+  .timeline-duration { color: var(--muted); font-size: 13px; }
+  .money { font-size: 38px; font-weight: 860; letter-spacing: -.06em; margin: 0 0 10px; }
+  .side > .panel:first-child { background: linear-gradient(135deg, var(--brand), #18323b); color: white; border-color: rgba(255,255,255,.1); box-shadow: 0 22px 54px rgba(17,24,39,.18); position: relative; overflow: hidden; }
+  .side > .panel:first-child::after { content: ""; position: absolute; right: 16px; top: 16px; width: 58px; height: 58px; border-radius: 50%; border: 1px solid rgba(199,154,59,.28); }
+  .side > .panel:first-child h2,
+  .side > .panel:first-child .money { color: white; }
+  .side > .panel:first-child .metric { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.12); }
+  .side > .panel:first-child .metric-label { color: #cbd5e1; }
+  .side > .panel:first-child .metric-value { color: white; }
+  .summary-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 9px; }
+  .metric { background: #f5f6f8; border: 1px solid var(--line); border-radius: 12px; padding: 11px; }
+  .metric-label { color: var(--muted); font-size: 12px; margin-bottom: 5px; }
+  .metric-value { font-weight: 760; letter-spacing: -.02em; overflow-wrap: anywhere; }
+  .notice { color: #8a5a12; background: var(--gold-soft); border: 1px solid #e2c773; border-radius: 12px; padding: 10px; font-size: 13px; line-height: 1.45; margin-top: 10px; }
+  .side-actions { display: grid; gap: 8px; }
+  .status-select { width: 100%; border: 1px solid var(--line); background: var(--panel); border-radius: 10px; padding: 9px; color: var(--text); margin-top: 8px; }
+  .editor { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+  .editor-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--muted); font-size: 12px; background: #f5f6f8; }
+  .editor-text { padding: 15px; white-space: pre-wrap; line-height: 1.65; font-size: 14px; color: #1f2937; }
+  details.proposal-details summary { cursor: pointer; color: var(--text); font-weight: 720; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  details.proposal-details summary::-webkit-details-marker { display: none; }
+  .case { border: 1px solid var(--line); border-radius: 12px; padding: 12px; background: #f5f6f8; margin-top: 9px; }
+  .case-title { font-weight: 720; margin-bottom: 5px; }
+  .case a { display: inline-block; margin-top: 8px; color: var(--support); text-decoration: none; font-size: 13px; font-weight: 650; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tech-list { display: flex; flex-wrap: wrap; gap: 7px; }
+  .toast { position: fixed; right: 22px; bottom: 22px; background: var(--brand); color: white; border-radius: 10px; padding: 10px 13px; opacity: 0; transform: translateY(6px); transition: opacity .18s ease, transform .18s ease; box-shadow: var(--shadow); }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: minmax(0, 1fr) 320px; }
+    .diagnostic-grid { grid-template-columns: 1fr 1fr; }
+    .timeline-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 820px) {
+    .layout { grid-template-columns: 1fr; }
+    .side { position: static; }
+  }
+  @media (max-width: 640px) {
+    .shell { padding: 14px 12px 44px; }
+    .topbar { align-items: flex-start; flex-direction: column; }
+    .top-actions, .side-actions { width: 100%; display: grid; grid-template-columns: 1fr; }
+    .btn { width: 100%; text-align: center; }
+    .diagnostic-grid, .summary-grid { grid-template-columns: 1fr; }
+    .panel { padding: 15px; border-radius: 14px; }
+    .meta-line { gap: 6px; }
+    .original-link { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+{% set score = (view.project.match_score or 0) | int %}
+{% set short_words = (view.proposal.short_proposal_text or '').split() | length %}
+{% set full_words = (view.proposal.proposal_text or '').split() | length %}
+<div class="shell">
+  <header class="topbar">
+    <a class="breadcrumb" href="/dashboard">Radar <span>/</span> Projeto</a>
+    <div class="top-actions">
+      <button class="btn primary" aria-label="Copiar proposta curta" onclick="copyText('short-text', this)">Copiar curta</button>
+      <button class="btn" aria-label="Copiar proposta completa" onclick="copyText('full-text', this)">Copiar completa</button>
+      <a class="btn" href="/api/proposal/{{ view.project.id }}/pdf" target="_blank" rel="noopener noreferrer">PDF</a>
+      {% if view.project.url %}<a class="btn" href="{{ view.project.url }}" target="_blank" rel="noopener noreferrer">Abrir projeto</a>{% endif %}
+    </div>
+  </header>
+
+  <section class="project-head">
+    <div class="meta-line">
+      <span class="chip blue">{{ view.project.platform }}</span>
+      {% if view.intelligence.category %}<span class="chip good">{{ view.intelligence.category }}</span>{% endif %}
+      <span class="chip"><span class="score-dot {{ 'high' if score >= 90 else 'mid' if score >= 70 else '' }}"></span>score {{ score }}</span>
+      <span class="chip">complexidade {{ view.intelligence.complexity or 'medium' }}</span>
+      <span class="chip">{{ status_labels[view.project.status] }}</span>
+      {% if view.pricing.requires_scope_validation %}<span class="chip warn">validar escopo</span>{% endif %}
+      {% if view.project.url %}<a class="chip original-link" href="{{ view.project.url }}" target="_blank" rel="noopener noreferrer">projeto original</a>{% endif %}
+    </div>
+    <h1>{{ view.project.title }}</h1>
+  </section>
+
+  <div class="layout">
+    <main>
+      <section class="panel subtle">
+        <h2>Resumo executivo</h2>
+        <div class="lead-title">{{ view.proposal.headline }}</div>
+        <p class="text">{{ view.proposal.executive_summary }}</p>
+        {% if view.intelligence.client_goal %}
+          <h3>Objetivo</h3>
+          <p class="text">{{ view.intelligence.client_goal }}</p>
+        {% endif %}
+      </section>
+
+      <section class="panel">
+        <h2>Diagn&oacute;stico do projeto</h2>
+        {% if view.intelligence.problem_summary %}<p class="text">{{ view.intelligence.problem_summary }}</p>{% endif %}
+        <div class="diagnostic-grid">
+          <div class="mini-card"><div class="mini-label">Categoria</div><div class="mini-value">{{ view.intelligence.category or 'N&atilde;o classificada' }}</div></div>
+          <div class="mini-card"><div class="mini-label">Complexidade</div><div class="mini-value">{{ view.intelligence.complexity or 'medium' }}</div></div>
+          <div class="mini-card">
+            <div class="mini-label">Confian&ccedil;a do escopo</div>
+            <div class="mini-value">{{ "%.0f"|format((view.intelligence.scope_confidence or 0) * 100) }}%</div>
+            <div class="confidence-bar"><div class="confidence-fill" style="width: {{ "%.0f"|format((view.intelligence.scope_confidence or 0) * 100) }}%"></div></div>
+          </div>
+        </div>
+        {% if view.intelligence.risks %}
+          <h3>Riscos</h3>
+          <div class="tech-list">{% for item in view.intelligence.risks %}<span class="chip warn">{{ item }}</span>{% endfor %}</div>
+        {% endif %}
+        {% if view.intelligence.clarifying_questions %}
+          <h3>Perguntas para fechar escopo</h3>
+          <ul class="plain-list">{% for item in view.intelligence.clarifying_questions[:5] %}<li><span class="dash-mark"></span><span>{{ item }}</span></li>{% endfor %}</ul>
+        {% endif %}
+      </section>
+
+      <section class="panel">
+        <h2>Solu&ccedil;&atilde;o proposta</h2>
+        {% if view.proposal.understanding %}<p class="text">{{ view.proposal.understanding }}</p>{% endif %}
+        {% if view.proposal.proposed_solution %}<p class="text">{{ view.proposal.proposed_solution }}</p>{% endif %}
+        {% if view.proposal.identified_challenges %}
+          <h3>Desafios identificados</h3>
+          <ul class="plain-list">{% for item in view.proposal.identified_challenges[:5] %}<li><span class="dash-mark"></span><span>{{ item }}</span></li>{% endfor %}</ul>
+        {% endif %}
+      </section>
+
+      {% if view.proposal.deliverables %}
+      <section class="panel">
+        <h2>Entreg&aacute;veis</h2>
+        <ul class="check-list">
+          {% for item in view.proposal.deliverables[:6] %}
+            <li><span class="mark">&check;</span><span>{{ item }}</span></li>
+          {% endfor %}
+        </ul>
+        {% if view.proposal.deliverables|length > 6 %}
+          <details>
+            <summary>Mostrar todos os entreg&aacute;veis</summary>
+            <ul class="check-list" style="margin-top: 10px;">
+              {% for item in view.proposal.deliverables[6:] %}
+                <li><span class="mark">&check;</span><span>{{ item }}</span></li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endif %}
+      </section>
+      {% endif %}
+
+      {% if view.proposal.work_method %}
+      <section class="panel">
+        <h2>Metodologia</h2>
+        <div class="method">
+          {% for item in view.proposal.work_method[:5] %}
+            <div class="method-step">
+              <div class="step-no">{{ loop.index }}</div>
+              <div>
+                <div class="step-name">{{ item.name }}</div>
+                <div class="muted">{{ item.description }}</div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if view.proposal.timeline %}
+      <section class="panel">
+        <h2>Cronograma</h2>
+        <p class="muted">Prazo estimado: {{ view.project.timeline_summary }}</p>
+        <div class="timeline-row">
+          {% for item in view.proposal.timeline %}
+            <div class="timeline-item">
+              <div class="timeline-phase">{{ item.phase }}</div>
+              <div class="timeline-duration">{{ item.duration }}</div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      <section class="panel">
+        <h2>Proposta para a plataforma</h2>
+        <div class="editor">
+          <div class="editor-bar">
+            <span>Proposta curta &middot; {{ short_words }} palavras</span>
+            <button class="btn" aria-label="Copiar proposta para a plataforma" onclick="copyText('short-text', this)">Copiar</button>
+          </div>
+          <div class="editor-text" id="short-text">{{ view.proposal.short_proposal_text }}</div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <details class="proposal-details">
+          <summary>
+            <span>Proposta completa</span>
+            <span class="chip">{{ full_words }} palavras</span>
+          </summary>
+          <div class="editor" style="margin-top: 12px;">
+            <div class="editor-bar">
+              <span>Vers&atilde;o completa com quebras preservadas</span>
+              <button class="btn" aria-label="Copiar proposta completa" onclick="copyText('full-text', this)">Copiar</button>
+            </div>
+            <div class="editor-text" id="full-text">{{ view.proposal.proposal_text }}</div>
+          </div>
+        </details>
+      </section>
+
+      {% if view.pricing.assumptions or view.proposal.clarifying_questions or view.pricing.requires_scope_validation %}
+      <section class="panel">
+        <h2>Antes de enviar</h2>
+        {% if view.pricing.requires_scope_validation %}
+          <div class="notice">Esta oportunidade precisa de valida&ccedil;&atilde;o de escopo antes de fechar prazo e compromisso final.</div>
+        {% endif %}
+        {% if view.pricing.assumptions %}
+          <h3>Premissas</h3>
+          <ul class="check-list">{% for item in view.pricing.assumptions[:5] %}<li><span class="mark">&check;</span><span>{{ item }}</span></li>{% endfor %}</ul>
+        {% endif %}
+        {% if view.proposal.clarifying_questions %}
+          <h3>Perguntas</h3>
+          <ul class="plain-list">{% for item in view.proposal.clarifying_questions[:5] %}<li><span class="dash-mark"></span><span>{{ item }}</span></li>{% endfor %}</ul>
+        {% endif %}
+      </section>
+      {% endif %}
+    </main>
+
+    <aside class="side">
+      <section class="panel">
+        <h2>Investimento</h2>
+        <div class="money">R$ {{ "%.0f"|format(view.pricing.suggested_price_brl or 0) }}</div>
+        <div class="summary-grid">
+          <div class="metric"><div class="metric-label">Faixa m&iacute;nima</div><div class="metric-value">R$ {{ "%.0f"|format(view.pricing.minimum_price_brl or 0) }}</div></div>
+          <div class="metric"><div class="metric-label">Faixa m&aacute;xima</div><div class="metric-value">R$ {{ "%.0f"|format(view.pricing.maximum_price_brl or 0) }}</div></div>
+          <div class="metric"><div class="metric-label">Horas</div><div class="metric-value">{{ view.pricing.estimated_hours or 0 }}h</div></div>
+          <div class="metric"><div class="metric-label">Prazo</div><div class="metric-value">{{ view.project.timeline_summary }}</div></div>
+          <div class="metric"><div class="metric-label">Confian&ccedil;a</div><div class="metric-value">{{ "%.0f"|format((view.pricing.confidence or 0) * 100) }}%</div></div>
+          <div class="metric"><div class="metric-label">Status</div><div class="metric-value">{{ status_labels[view.project.status] }}</div></div>
+        </div>
+        {% if view.pricing.requires_scope_validation %}<div class="notice">Validar escopo antes de enviar compromisso definitivo.</div>{% endif %}
+      </section>
+
+      <section class="panel">
+        <h2>A&ccedil;&otilde;es</h2>
+        <div class="side-actions">
+          <button class="btn primary" aria-label="Copiar proposta curta" onclick="copyText('short-text', this)">Copiar proposta curta</button>
+          <button class="btn" aria-label="Copiar proposta completa" onclick="copyText('full-text', this)">Copiar proposta completa</button>
+          <a class="btn" href="/api/proposal/{{ view.project.id }}/pdf" target="_blank" rel="noopener noreferrer">Baixar PDF</a>
+          {% if view.project.url %}<a class="btn" href="{{ view.project.url }}" target="_blank" rel="noopener noreferrer">Abrir projeto original</a>{% endif %}
+        </div>
+        <h3>Status</h3>
+        <select class="status-select" aria-label="Atualizar status do projeto" onchange="alterarStatus('{{ view.project.id }}', this.value)">
+          {% for key, label in status_labels.items() %}
+            {% if key != 'descartado' %}
+              <option value="{{ key }}" {{ 'selected' if view.project.status == key else '' }}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </section>
+
+      {% if view.proposal.technologies or view.intelligence.relevant_technologies %}
+      <section class="panel">
+        <h2>Tecnologias</h2>
+        <div class="tech-list">
+          {% for tech in (view.proposal.technologies or view.intelligence.relevant_technologies)[:6] %}
+            <span class="chip">{{ tech }}</span>
+          {% endfor %}
+        </div>
+        {% if (view.proposal.technologies or view.intelligence.relevant_technologies)|length > 6 %}
+          <details>
+            <summary>Mostrar todas</summary>
+            <div class="tech-list" style="margin-top: 10px;">
+              {% for tech in (view.proposal.technologies or view.intelligence.relevant_technologies)[6:] %}
+                <span class="chip">{{ tech }}</span>
+              {% endfor %}
+            </div>
+          </details>
+        {% endif %}
+      </section>
+      {% endif %}
+
+      {% if view.proposal.relevant_cases %}
+      <section class="panel">
+        <h2>Cases relacionados</h2>
+        {% for case in view.proposal.relevant_cases[:2] %}
+          {% if case.name or case.reason %}
+            <div class="case">
+              <div class="case-title">{{ case.name }}</div>
+              {% if case.reason %}<div class="muted">{{ case.reason }}</div>{% endif %}
+              {% if case.url %}<a href="{{ case.url }}" target="_blank" rel="noopener noreferrer">Ver demonstra&ccedil;&atilde;o</a>{% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </section>
+      {% endif %}
+    </aside>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite">Copiado</div>
+<script>
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  toast.textContent = text;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2000);
+}
+function writeClipboard(texto) {
+  if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(texto);
+  return new Promise((resolve, reject) => {
+    const area = document.createElement('textarea');
+    area.value = texto;
+    area.style.position = 'fixed';
+    area.style.left = '-9999px';
+    document.body.appendChild(area);
+    area.focus();
+    area.select();
+    try { document.execCommand('copy') ? resolve() : reject(new Error('copy failed')); }
+    catch (err) { reject(err); }
+    finally { area.remove(); }
+  });
+}
+function copyText(id, btn) {
+  const original = btn.textContent;
+  const texto = document.getElementById(id).innerText;
+  writeClipboard(texto).then(() => {
+    btn.textContent = '✓ Copiado';
+    btn.classList.add('copied');
+    showToast('Copiado para a area de transferencia');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 2000);
+  }).catch(() => showToast('Nao foi possivel copiar'));
+}
+function alterarStatus(id, status) {
+  fetch(`/api/status/${id}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ status })
+  }).then(r => r.json()).then(data => {
+    showToast(data.ok ? `Status atualizado para ${data.label}` : (data.error || 'Erro ao atualizar status'));
+  });
+}
+</script>
+</body>
+</html>

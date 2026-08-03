@@ -1,0 +1,71 @@
+servicos:
+  - id: "automation_python"
+    nome: "Automação de Processos com Python"
+    entregas:
+      - "Scripts personalizados"
+      - "Automação de tarefas repetitivas"
+      - "Processamento de arquivos"
+      - "Integração entre sistemas"
+      - "Rotinas agendadas"
+
+  - id: "data_engineering"
+    nome: "ETL e Engenharia de Dados"
+    entregas:
+      - "Coleta, limpeza e transformação de dados"
+      - "Pipelines de dados"
+      - "Validação e deduplicação"
+      - "Persistência em banco de dados"
+      - "Logs e monitoramento"
+
+  - id: "power_bi"
+    nome: "Power BI e Dashboards"
+    entregas:
+      - "Modelagem de dados"
+      - "Power Query"
+      - "Medidas DAX"
+      - "Correção de dashboards"
+      - "Indicadores e relatórios executivos"
+
+  - id: "excel_vba"
+    nome: "Excel Avançado e VBA"
+    entregas:
+      - "Planilhas automatizadas"
+      - "Fórmulas e validações"
+      - "Macros VBA"
+      - "Power Query"
+      - "Relatórios e dashboards"
+
+  - id: "api_backend"
+    nome: "APIs e Backends"
+    entregas:
+      - "APIs REST"
+      - "Autenticação"
+      - "Integração com bancos de dados"
+      - "Serviços assíncronos"
+      - "Documentação técnica"
+
+  - id: "fullstack"
+    nome: "Aplicações Full Stack e SaaS"
+    entregas:
+      - "Frontend React"
+      - "Backend FastAPI"
+      - "Banco de dados"
+      - "Autenticação"
+      - "Docker e deploy"
+
+  - id: "desktop"
+    nome: "Aplicações Desktop em Python"
+    entregas:
+      - "Interfaces PyQt6 ou CustomTkinter"
+      - "Processamento local"
+      - "SQLite"
+      - "Geração de executável"
+
+  - id: "scraping"
+    nome: "Web Scraping e Coleta Automatizada"
+    entregas:
+      - "Playwright ou Selenium"
+      - "BeautifulSoup"
+      - "Normalização dos dados"
+      - "Tratamento de falhas"
+      - "Exportação estruturada"

@@ -1,0 +1,20 @@
+<svg width="720" height="180" viewBox="0 0 720 180" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FreelanceBot AI logo</title>
+  <desc id="desc">Minimal logo for an AI freelance proposal automation product.</desc>
+  <rect width="720" height="180" rx="28" fill="#07111F"/>
+  <g transform="translate(44 36)">
+    <rect x="0" y="0" width="108" height="108" rx="24" fill="#0F2340"/>
+    <path d="M28 33C28 28.5817 31.5817 25 36 25H72C76.4183 25 80 28.5817 80 33V75C80 79.4183 76.4183 83 72 83H36C31.5817 83 28 79.4183 28 75V33Z" fill="#FFFFFF"/>
+    <path d="M41 42H67" stroke="#0F2340" stroke-width="5" stroke-linecap="round"/>
+    <path d="M41 55H60" stroke="#0F2340" stroke-width="5" stroke-linecap="round"/>
+    <path d="M41 68H70" stroke="#0F2340" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="80" cy="28" r="12" fill="#D9A441"/>
+    <path d="M80 15V8M80 48V41M67 28H60M100 28H93M70.8 18.8L65.8 13.8M94.2 42.2L89.2 37.2M89.2 18.8L94.2 13.8M65.8 42.2L70.8 37.2" stroke="#D9A441" stroke-width="3" stroke-linecap="round"/>
+    <path d="M79 84C93 80 101 70 104 56" stroke="#D9A441" stroke-width="4" stroke-linecap="round"/>
+    <path d="M100 56L106 48L109 58" stroke="#D9A441" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(182 48)">
+    <text x="0" y="41" fill="#FFFFFF" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="42" font-weight="750" letter-spacing="-1">FreelanceBot AI</text>
+    <text x="2" y="78" fill="#8EA2BE" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="18" font-weight="500">Opportunity analysis, proposal generation and smart pricing</text>
+  </g>
+</svg>

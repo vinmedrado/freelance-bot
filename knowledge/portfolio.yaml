@@ -1,0 +1,153 @@
+projetos:
+  - nome: "Vinance"
+    categoria: "Finanças pessoais e inteligência financeira"
+    resumo: >
+      Plataforma full stack com diagnóstico financeiro, organização de receitas
+      e despesas, ranking educacional de ativos e Advisor IA contextual.
+    tecnologias:
+      - "Python"
+      - "FastAPI"
+      - "PostgreSQL"
+      - "Redis"
+      - "Celery"
+      - "React"
+      - "Groq API"
+    demonstracao: "https://vinance-ai.netlify.app"
+    usar_quando:
+      - "finanças"
+      - "dashboard"
+      - "SaaS"
+      - "IA"
+      - "FastAPI"
+      - "React"
+
+  - nome: "Football Decision Lab"
+    categoria: "Machine Learning, MLOps e automação"
+    resumo: >
+      Sistema local de apoio à decisão com coleta, validação temporal,
+      modelos, filtros operacionais, monitoramento e banca simulada.
+    tecnologias:
+      - "Python"
+      - "Pandas"
+      - "Scikit-learn"
+      - "XGBoost"
+      - "LightGBM"
+    demonstracao: "https://football-decision-lab.netlify.app/"
+    usar_quando:
+      - "machine learning"
+      - "pipeline"
+      - "automação"
+      - "MLOps"
+      - "dados temporais"
+
+  - nome: "Lumyra"
+    categoria: "SaaS para operação de eventos"
+    resumo: >
+      Plataforma multi-tenant com gestão de eventos, RSVP, convidados,
+      financeiro, documentos, notificações, workers e colaboração em tempo real.
+    tecnologias:
+      - "FastAPI"
+      - "React"
+      - "TypeScript"
+      - "WebSocket"
+      - "SQLite"
+      - "Docker"
+    demonstracao: "https://lumyra-events.netlify.app/"
+    usar_quando:
+      - "SaaS"
+      - "multi-tenant"
+      - "eventos"
+      - "WebSocket"
+      - "aplicação completa"
+
+  - nome: "Meu Carro Vale"
+    categoria: "Valuation automotivo"
+    resumo: >
+      Plataforma SaaS com FIPE local-first, comparáveis de mercado,
+      dashboard, score, laudo PDF e estrutura preparada para monetização.
+    tecnologias:
+      - "FastAPI"
+      - "React"
+      - "PostgreSQL"
+      - "Alembic"
+      - "Docker"
+    demonstracao: "https://meu-carro-vale.netlify.app/"
+    usar_quando:
+      - "valuation"
+      - "dashboard"
+      - "PDF"
+      - "SaaS"
+      - "dados de mercado"
+
+  - nome: "Marketplace Seller Platform"
+    categoria: "Operação e inteligência para marketplaces"
+    resumo: >
+      Estudo de caso full stack com integração Mercado Livre, pricing assistido,
+      pipelines de dados, ML explicável e privacidade por design.
+    tecnologias:
+      - "React"
+      - "FastAPI"
+      - "PostgreSQL"
+      - "Docker"
+      - "SQLAlchemy"
+    demonstracao: "https://vinmedrado.github.io/marketplace-seller-platform/"
+    usar_quando:
+      - "marketplace"
+      - "pricing"
+      - "integração"
+      - "OAuth"
+      - "engenharia de dados"
+
+  - nome: "Applymize"
+    categoria: "Inteligência de carreira e automação de vagas"
+    resumo: >
+      Plataforma com descoberta de vagas, matching, análise ATS,
+      acompanhamento de candidaturas, automações e alertas.
+    tecnologias:
+      - "FastAPI"
+      - "PostgreSQL"
+      - "React"
+      - "Docker"
+      - "Groq API"
+    demonstracao: "https://applymize.netlify.app/"
+    usar_quando:
+      - "matching"
+      - "ATS"
+      - "automação"
+      - "scraping"
+      - "IA"
+
+  - nome: "Lotofácil Lab"
+    categoria: "Engenharia de dados e Machine Learning"
+    resumo: >
+      Aplicação modular com importação, validação, engenharia de features,
+      análise estatística e avaliação temporal de modelos multilabel.
+    tecnologias:
+      - "Python"
+      - "Streamlit"
+      - "Scikit-learn"
+      - "Pandas"
+    demonstracao: null
+    usar_quando:
+      - "engenharia de features"
+      - "machine learning"
+      - "validação temporal"
+      - "Streamlit"
+
+  - nome: "Packly Offline"
+    categoria: "Aplicação desktop"
+    resumo: >
+      Compactador de arquivos offline com preview, perfis inteligentes,
+      histórico e geração de executável.
+    tecnologias:
+      - "Python"
+      - "CustomTkinter"
+      - "PyInstaller"
+    demonstracao: null
+    usar_quando:
+      - "desktop"
+      - "aplicação offline"
+      - "executável"
+      - "Python"
+
+portfolio_principal: "https://vinmedrado.github.io/portfolio/"

@@ -1,0 +1,70 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FreelanceBot AI banner</title>
+  <desc id="desc">Professional banner for GitHub presenting FreelanceBot AI.</desc>
+  <rect width="1280" height="640" fill="#07111F"/>
+  <path d="M0 0H1280V640H0V0Z" fill="url(#bg)"/>
+  <g opacity="0.25">
+    <path d="M936 72C1085 111 1178 206 1215 357" stroke="#D9A441" stroke-width="2"/>
+    <path d="M982 112C1085 152 1151 226 1182 335" stroke="#8EA2BE" stroke-width="1.5"/>
+    <path d="M58 539C221 464 385 454 550 510" stroke="#21466F" stroke-width="2"/>
+  </g>
+  <g transform="translate(88 82)">
+    <rect x="0" y="0" width="112" height="112" rx="26" fill="#0F2340"/>
+    <rect x="30" y="24" width="55" height="72" rx="13" fill="#FFFFFF"/>
+    <path d="M43 43H72" stroke="#0F2340" stroke-width="7" stroke-linecap="round"/>
+    <path d="M43 59H64" stroke="#0F2340" stroke-width="7" stroke-linecap="round"/>
+    <path d="M43 75H75" stroke="#0F2340" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="86" cy="30" r="13" fill="#D9A441"/>
+    <path d="M83 95C99 90 107 78 110 61" stroke="#D9A441" stroke-width="5" stroke-linecap="round"/>
+    <path d="M105 61L112 51L116 64" stroke="#D9A441" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(88 240)">
+    <text x="0" y="0" fill="#FFFFFF" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="78" font-weight="780" letter-spacing="-2.6">FreelanceBot AI</text>
+    <text x="3" y="66" fill="#C8D3E2" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="520">Intelligent Freelance Opportunity Analysis,</text>
+    <text x="3" y="104" fill="#C8D3E2" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="520">Commercial Proposal Generation</text>
+    <text x="3" y="142" fill="#C8D3E2" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="520">and Smart Pricing Engine</text>
+  </g>
+  <g transform="translate(88 496)">
+    <g>
+      <rect width="104" height="34" rx="17" fill="#0F2340" stroke="#21466F"/>
+      <text x="52" y="22" text-anchor="middle" fill="#EAF0F8" font-family="Inter, ui-sans-serif, system-ui" font-size="15" font-weight="650">Python</text>
+    </g>
+    <g transform="translate(116 0)">
+      <rect width="88" height="34" rx="17" fill="#0F2340" stroke="#21466F"/>
+      <text x="44" y="22" text-anchor="middle" fill="#EAF0F8" font-family="Inter, ui-sans-serif, system-ui" font-size="15" font-weight="650">Flask</text>
+    </g>
+    <g transform="translate(216 0)">
+      <rect width="118" height="34" rx="17" fill="#0F2340" stroke="#21466F"/>
+      <text x="59" y="22" text-anchor="middle" fill="#EAF0F8" font-family="Inter, ui-sans-serif, system-ui" font-size="15" font-weight="650">Playwright</text>
+    </g>
+    <g transform="translate(346 0)">
+      <rect width="84" height="34" rx="17" fill="#0F2340" stroke="#21466F"/>
+      <text x="42" y="22" text-anchor="middle" fill="#EAF0F8" font-family="Inter, ui-sans-serif, system-ui" font-size="15" font-weight="650">Groq</text>
+    </g>
+    <g transform="translate(442 0)">
+      <rect width="92" height="34" rx="17" fill="#0F2340" stroke="#21466F"/>
+      <text x="46" y="22" text-anchor="middle" fill="#EAF0F8" font-family="Inter, ui-sans-serif, system-ui" font-size="15" font-weight="650">SQLite</text>
+    </g>
+    <g transform="translate(546 0)">
+      <rect width="102" height="34" rx="17" fill="#0F2340" stroke="#21466F"/>
+      <text x="51" y="22" text-anchor="middle" fill="#EAF0F8" font-family="Inter, ui-sans-serif, system-ui" font-size="15" font-weight="650">Power BI</text>
+    </g>
+  </g>
+  <g transform="translate(850 170)">
+    <rect x="0" y="0" width="320" height="268" rx="24" fill="#0B1728" stroke="#21466F"/>
+    <rect x="24" y="28" width="120" height="12" rx="6" fill="#D9A441"/>
+    <rect x="24" y="62" width="244" height="14" rx="7" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="24" y="94" width="210" height="12" rx="6" fill="#8EA2BE" opacity="0.7"/>
+    <rect x="24" y="132" width="272" height="74" rx="14" fill="#0F2340" stroke="#21466F"/>
+    <circle cx="52" cy="169" r="12" fill="#D9A441"/>
+    <path d="M82 154H258M82 174H218" stroke="#C8D3E2" stroke-width="8" stroke-linecap="round"/>
+    <path d="M236 228H282" stroke="#D9A441" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <defs>
+    <radialGradient id="bg" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1018 148) rotate(141.7) scale(711 541)">
+      <stop stop-color="#173A63"/>
+      <stop offset="0.45" stop-color="#07111F"/>
+      <stop offset="1" stop-color="#050A12"/>
+    </radialGradient>
+  </defs>
+</svg>

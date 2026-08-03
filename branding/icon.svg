@@ -1,0 +1,13 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">FreelanceBot AI icon</title>
+  <desc id="desc">Compact square icon with a proposal document, AI signal and automation arrow.</desc>
+  <rect width="128" height="128" rx="28" fill="#07111F"/>
+  <rect x="25" y="24" width="62" height="76" rx="14" fill="#FFFFFF"/>
+  <path d="M40 43H72" stroke="#0F2340" stroke-width="7" stroke-linecap="round"/>
+  <path d="M40 59H64" stroke="#0F2340" stroke-width="7" stroke-linecap="round"/>
+  <path d="M40 75H75" stroke="#0F2340" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="90" cy="33" r="14" fill="#D9A441"/>
+  <path d="M90 13V6M90 60V53M70 33H63M117 33H110M75.8 18.8L70.8 13.8M109.2 52.2L104.2 47.2M104.2 18.8L109.2 13.8M70.8 52.2L75.8 47.2" stroke="#D9A441" stroke-width="4" stroke-linecap="round"/>
+  <path d="M83 100C101 94 111 81 115 63" stroke="#D9A441" stroke-width="6" stroke-linecap="round"/>
+  <path d="M110 63L118 52L122 66" stroke="#D9A441" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

@@ -1,0 +1,37 @@
+principios:
+  - "Negociar escopo antes de reduzir preço"
+  - "Não iniciar projeto com requisitos críticos indefinidos"
+  - "Separar funcionalidades essenciais de melhorias futuras"
+  - "Registrar claramente o que está incluso"
+  - "Evitar prazo artificialmente curto"
+
+perguntas_antes_de_fechar:
+  - "Qual é o resultado final esperado?"
+  - "Quais arquivos, acessos ou dados serão disponibilizados?"
+  - "Existe um exemplo do resultado desejado?"
+  - "Há prazo obrigatório?"
+  - "Quais integrações externas estão envolvidas?"
+  - "A entrega inclui código-fonte, instalação e documentação?"
+  - "Quantas rodadas de ajuste são esperadas?"
+
+incluido_por_padrao:
+  - "Desenvolvimento do escopo acordado"
+  - "Validação funcional"
+  - "Correções de defeitos do escopo entregue"
+  - "Orientação básica de uso"
+  - "Código organizado"
+
+nao_incluido_por_padrao:
+  - "Mudanças de escopo após aprovação"
+  - "Custos de servidores, APIs ou serviços externos"
+  - "Licenças de software"
+  - "Manutenção contínua"
+  - "Suporte ilimitado"
+  - "Garantia de resultado financeiro"
+
+quando_recusar:
+  - "Projeto fora das competências definidas"
+  - "Pedido para burlar segurança ou termos de serviço"
+  - "Prazo incompatível com o escopo"
+  - "Cliente não fornece informações mínimas"
+  - "Expectativa de trabalho ilimitado por valor fixo"

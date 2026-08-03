@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment and local state
+.env
+freelance_bot.db
+*.sqlite
+*.sqlite3
+
+# Browser profiles and scraper dumps
+.browser_profiles/
+.chrome_cdp_profile/
+*_dump.html
+*_sem_cards.html
+
+# Generated artifacts
+artifacts/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
