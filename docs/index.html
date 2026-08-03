@@ -3,101 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FreelanceBot AI | Portfolio Case</title>
-  <meta name="description" content="FreelanceBot AI: sistema local para triagem de oportunidades freelance, precificacao e geracao de propostas comerciais.">
+  <title>FreelanceBot AI | Radar de oportunidades freelance</title>
+  <meta name="description" content="FreelanceBot AI transforma oportunidades freelance em diagnostico, precificacao e propostas comerciais revisaveis.">
   <style>
     :root {
-      --bg: #f4f6f8;
-      --ink: #101418;
-      --muted: #5f6b7a;
-      --line: #d9e0e8;
+      --bg: #eef1f4;
+      --panel: #ffffff;
+      --ink: #111827;
+      --muted: #586678;
+      --line: #d6dee8;
       --dark: #111827;
-      --teal: #0f6b78;
-      --gold: #b8872f;
-      --green: #27825c;
-      --surface: #ffffff;
-      --shadow: 0 24px 70px rgba(16, 20, 24, .14);
+      --teal: #0f5967;
+      --gold: #bd8f36;
+      --green: #2f7d58;
+      --shadow: 0 24px 70px rgba(17, 24, 39, .15);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      background: var(--bg);
+      background: linear-gradient(180deg, #f6f8fa 0, var(--bg) 520px, #f3f5f7 100%);
       color: var(--ink);
     }
     a { color: inherit; }
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-    }
+    img { display: block; max-width: 100%; }
+    .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
     .nav {
-      height: 72px;
+      min-height: 76px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 850;
-      letter-spacing: 0;
-    }
-    .mark {
-      width: 40px;
-      height: 40px;
-      position: relative;
-      flex: 0 0 auto;
-      border-radius: 8px;
-      background: var(--dark);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .14);
-    }
-    .mark::before {
-      content: "";
-      position: absolute;
-      inset: 10px;
-      border: 1px solid rgba(255, 255, 255, .42);
-      border-radius: 999px;
-    }
-    .mark::after {
-      content: "";
-      position: absolute;
-      top: 9px;
-      right: 9px;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--gold);
-    }
-    .nav a {
-      min-height: 40px;
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 900; }
+    .mark { width: 40px; height: 40px; border-radius: 8px; background: var(--dark); position: relative; }
+    .mark:before { content: ""; position: absolute; inset: 10px; border: 1px solid rgba(255,255,255,.42); border-radius: 50%; }
+    .mark:after { content: ""; position: absolute; top: 9px; right: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--gold); }
+    .nav-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .btn {
+      min-height: 42px;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       padding: 0 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, .78);
+      background: rgba(255,255,255,.86);
       text-decoration: none;
       font-size: 14px;
-      font-weight: 750;
+      font-weight: 850;
     }
+    .btn.primary { background: var(--dark); border-color: var(--dark); color: white; }
+    .btn.gold { background: var(--gold); border-color: var(--gold); color: #111827; }
+
     .hero {
-      min-height: calc(100vh - 72px);
+      min-height: calc(100vh - 76px);
       display: grid;
-      grid-template-columns: minmax(0, .94fr) minmax(420px, 1.06fr);
-      gap: 44px;
+      grid-template-columns: minmax(0, .86fr) minmax(520px, 1.14fr);
+      gap: 42px;
       align-items: center;
-      padding: 40px 0 70px;
+      padding: 34px 0 58px;
     }
     .eyebrow {
-      margin-bottom: 14px;
       color: var(--teal);
       font-size: 12px;
-      font-weight: 850;
+      font-weight: 900;
       letter-spacing: .12em;
       text-transform: uppercase;
+      margin-bottom: 14px;
     }
     h1 {
       margin: 0;
@@ -107,402 +81,248 @@
       letter-spacing: 0;
     }
     .lead {
-      max-width: 590px;
+      max-width: 600px;
       margin: 22px 0 0;
-      color: #435063;
+      color: #425066;
       font-size: 18px;
       line-height: 1.65;
     }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 30px;
-    }
-    .btn {
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 16px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: var(--surface);
-      text-decoration: none;
-      font-weight: 800;
-    }
-    .btn.primary {
-      background: var(--dark);
-      border-color: var(--dark);
-      color: white;
-    }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px; }
     .metrics {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
-      margin-top: 34px;
-      max-width: 610px;
-      overflow: hidden;
+      max-width: 620px;
+      margin-top: 32px;
       border: 1px solid var(--line);
       border-radius: 8px;
+      overflow: hidden;
       background: var(--line);
     }
-    .metrics div {
-      padding: 16px;
-      background: rgba(255, 255, 255, .82);
-    }
-    .metrics strong {
-      display: block;
-      font-size: 18px;
-    }
-    .metrics span {
-      display: block;
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 12px;
-      font-weight: 760;
-    }
-    .product {
-      position: relative;
-      min-height: 560px;
-    }
-    .board {
-      position: absolute;
-      inset: 20px 0 auto 20px;
-      min-height: 420px;
-      padding: 18px;
-      border-radius: 8px;
-      background: linear-gradient(145deg, #111827, #164852);
-      color: white;
-      box-shadow: var(--shadow);
-    }
-    .board-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding-bottom: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, .12);
-      font-weight: 850;
-    }
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #d8eef2;
-      font-size: 12px;
-    }
-    .status::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: var(--green);
-    }
-    .cards {
-      display: grid;
-      gap: 12px;
-      margin-top: 16px;
-    }
-    .opp {
-      display: grid;
-      grid-template-columns: 48px 1fr auto;
-      align-items: center;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, .96);
-      color: var(--ink);
-    }
-    .score {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 8px;
-      background: var(--green);
-      color: white;
-      font-weight: 900;
-    }
-    .opp strong { display: block; line-height: 1.25; }
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-    .chip {
-      padding: 4px 8px;
-      border-radius: 999px;
-      background: #eef2f6;
-      color: #536273;
-      font-size: 11px;
-      font-weight: 800;
-    }
-    .money {
-      text-align: right;
-      color: var(--teal);
-      font-weight: 950;
-    }
-    .money small {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
-      font-weight: 760;
-    }
-    .summary {
-      position: absolute;
-      right: 0;
-      bottom: 12px;
-      width: min(330px, 82%);
-      padding: 18px;
+    .metrics div { padding: 16px; background: rgba(255,255,255,.78); }
+    .metrics strong { display: block; font-size: 18px; }
+    .metrics span { display: block; margin-top: 5px; color: var(--muted); font-size: 12px; font-weight: 750; }
+
+    .preview {
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: #fffaf0;
-      box-shadow: 0 18px 44px rgba(16, 20, 24, .16);
-    }
-    .summary small {
-      color: var(--muted);
-      font-weight: 850;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-    .summary h2 {
-      margin: 8px 0 14px;
-      font-size: 34px;
-      letter-spacing: 0;
-    }
-    .summary-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .summary-grid div {
-      padding: 10px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
+      overflow: hidden;
       background: white;
-      font-size: 13px;
-      font-weight: 800;
+      box-shadow: var(--shadow);
+      position: relative;
     }
-    .section {
-      padding: 64px 0;
-      border-top: 1px solid var(--line);
+    .preview:after {
+      content: "Demo navegavel";
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(17, 24, 39, .92);
+      color: white;
+      font-size: 12px;
+      font-weight: 850;
     }
-    .section h2 {
-      margin: 0 0 24px;
-      font-size: 32px;
-      letter-spacing: 0;
+
+    .section { padding: 58px 0; border-top: 1px solid var(--line); }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-    }
+    .section h2 { margin: 0; font-size: 32px; letter-spacing: 0; }
+    .section p { color: var(--muted); line-height: 1.6; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
     .item {
+      min-height: 170px;
       padding: 20px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, .82);
+      background: rgba(255,255,255,.82);
     }
-    .item strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 16px;
-    }
-    .item p {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-    .screens {
+    .item strong { display: block; margin-bottom: 8px; font-size: 16px; }
+    .item p { margin: 0; font-size: 14px; }
+    .flow { display: grid; gap: 8px; }
+    .flow-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
-    }
-    .screen {
-      padding: 10px;
+      grid-template-columns: 38px 1fr;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: white;
     }
-    .screen img {
-      display: block;
-      width: 100%;
-      border-radius: 6px;
+    .flow-row span {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: #e6eef1;
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .screens { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .screen {
       border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 14px 36px rgba(17,24,39,.08);
     }
-    footer {
-      padding: 32px 0 48px;
-      color: var(--muted);
-      font-size: 14px;
+    .screen img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top left;
+      border-bottom: 1px solid var(--line);
     }
+    .screen strong { display: block; padding: 12px 12px 4px; font-size: 14px; }
+    .screen p { margin: 0; padding: 0 12px 14px; font-size: 13px; }
+    .cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 18px;
+      padding: 24px;
+      border-radius: 8px;
+      background: var(--dark);
+      color: white;
+    }
+    .cta h2 { margin: 0 0 8px; font-size: 28px; }
+    .cta p { margin: 0; color: #cbd5e1; }
+    footer { padding: 30px 0 46px; color: var(--muted); font-size: 14px; }
 
-    @media (max-width: 920px) {
-      .hero {
-        min-height: auto;
-        grid-template-columns: 1fr;
-      }
-      .product {
-        min-height: auto;
-      }
-      .board,
-      .summary {
-        position: static;
-        width: auto;
-      }
-      .summary {
-        margin-top: 14px;
-      }
-      .grid,
-      .screens {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 980px) {
+      .hero { min-height: auto; grid-template-columns: 1fr; }
+      .grid, .screens { grid-template-columns: 1fr; }
+      .preview img { max-height: 520px; object-fit: cover; object-position: top left; width: 100%; }
     }
     @media (max-width: 640px) {
-      .nav {
-        height: auto;
-        padding: 16px 0;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-      h1 {
-        font-size: 38px;
-      }
-      .lead {
-        font-size: 16px;
-      }
-      .actions,
-      .metrics {
-        grid-template-columns: 1fr;
-      }
-      .actions {
-        display: grid;
-      }
-      .btn,
-      .nav a {
-        width: 100%;
-      }
-      .opp {
-        grid-template-columns: 1fr;
-      }
-      .money {
-        text-align: left;
-      }
+      .nav { align-items: flex-start; flex-direction: column; padding: 16px 0; }
+      .nav-actions, .actions, .btn { width: 100%; }
+      h1 { font-size: 38px; }
+      .lead { font-size: 16px; }
+      .metrics { grid-template-columns: 1fr; }
+      .section-head, .cta { grid-template-columns: 1fr; align-items: start; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <nav class="nav">
-      <div class="brand">
-        <span class="mark" aria-hidden="true"></span>
-        <span>FreelanceBot AI</span>
+      <div class="brand"><span class="mark" aria-hidden="true"></span><span>FreelanceBot AI</span></div>
+      <div class="nav-actions">
+        <a class="btn" href="https://github.com/vinmedrado/freelance-bot" target="_blank" rel="noopener noreferrer">Repositorio</a>
+        <a class="btn primary" href="demo.html">Abrir demo</a>
       </div>
-      <a href="demo.html">Abrir demo</a>
     </nav>
 
     <main class="hero">
       <section>
-        <div class="eyebrow">Portfolio case</div>
-        <h1>Radar local para transformar oportunidades freelance em propostas calculadas.</h1>
+        <div class="eyebrow">Produto demonstravel para portfolio</div>
+        <h1>Radar de oportunidades que vira proposta comercial.</h1>
         <p class="lead">
-          Um sistema Python com scraping, matching, base de conhecimento, pricing deterministico,
-          geracao de proposta e dashboard Flask para revisar oportunidades antes do envio.
+          FreelanceBot AI simula um fluxo real de prospeccao: encontra projetos, prioriza aderencia,
+          estima preco e prazo, levanta riscos e deixa a proposta pronta para revisao humana.
         </p>
         <div class="actions">
           <a class="btn primary" href="demo.html">Experimentar produto</a>
-          <a class="btn" href="https://github.com/vinmedrado/freelance-bot" target="_blank" rel="noopener noreferrer">Ver repositorio</a>
+          <a class="btn" href="#screens">Ver telas</a>
         </div>
         <div class="metrics">
-          <div><strong>3 fontes</strong><span>Workana, 99Freelas e Freelancer.com</span></div>
-          <div><strong>7 etapas</strong><span>da coleta ao PDF comercial</span></div>
-          <div><strong>pytest</strong><span>validacao automatizada do core</span></div>
+          <div><strong>Triagem</strong><span>score, plataforma e categoria</span></div>
+          <div><strong>Pricing</strong><span>horas, faixa e confianca</span></div>
+          <div><strong>Proposta</strong><span>texto editavel para envio</span></div>
         </div>
       </section>
 
-      <section class="product" aria-label="Visual do produto">
-        <div class="board">
-          <div class="board-head">
-            <span>Dashboard de oportunidades</span>
-            <span class="status">pipeline pronto</span>
-          </div>
-          <div class="cards">
-            <article class="opp">
-              <div class="score">92</div>
-              <div>
-                <strong>Dashboard Power BI para vendas</strong>
-                <div class="chips"><span class="chip">Power BI</span><span class="chip">DAX</span><span class="chip">escopo medio</span></div>
-              </div>
-              <div class="money">R$ 2.400<small>27h</small></div>
-            </article>
-            <article class="opp">
-              <div class="score">84</div>
-              <div>
-                <strong>Automacao Python com integracao de API</strong>
-                <div class="chips"><span class="chip">Python</span><span class="chip">API</span><span class="chip">logs</span></div>
-              </div>
-              <div class="money">R$ 2.900<small>30h</small></div>
-            </article>
-            <article class="opp">
-              <div class="score">78</div>
-              <div>
-                <strong>Aplicacao interna com dashboard</strong>
-                <div class="chips"><span class="chip">Flask</span><span class="chip">SQLite</span><span class="chip">PDF</span></div>
-              </div>
-              <div class="money">R$ 4.500<small>78h</small></div>
-            </article>
-          </div>
-        </div>
-        <aside class="summary">
-          <small>Proposta gerada</small>
-          <h2>R$ 2.400</h2>
-          <div class="summary-grid">
-            <div>Prazo: 5 a 8 dias</div>
-            <div>Confianca: 95%</div>
-            <div>Risco: medio</div>
-            <div>Saida: PDF</div>
-          </div>
-        </aside>
-      </section>
+      <a class="preview" href="demo.html" aria-label="Abrir demo do FreelanceBot AI">
+        <img src="images/demo-dashboard.png" alt="Dashboard interativo do FreelanceBot AI">
+      </a>
     </main>
   </div>
 
   <section class="section">
     <div class="wrap">
-      <h2>O que demonstra</h2>
+      <div class="section-head">
+        <h2>O que o produto demonstra</h2>
+        <a class="btn" href="demo.html">Abrir experiencia</a>
+      </div>
       <div class="grid">
         <div class="item">
-          <strong>Produto completo</strong>
-          <p>O projeto nao para no script: tem dashboard, banco local, status, copia de propostas e download de PDF.</p>
+          <strong>Produto, nao apenas script</strong>
+          <p>O usuario navega por oportunidades, filtros, status, estimativa e proposta em uma interface operacional.</p>
         </div>
         <div class="item">
-          <strong>IA com controle</strong>
-          <p>A IA apoia o texto, enquanto pricing, regras comerciais e validacoes preservam previsibilidade.</p>
+          <strong>IA aplicada com controle</strong>
+          <p>A proposta textual fica editavel, enquanto score, horas, preco e riscos seguem uma logica previsivel.</p>
         </div>
         <div class="item">
-          <strong>Base profissional</strong>
-          <p>Os arquivos YAML tornam servicos, portfolio, tecnologias e estilo editaveis sem mexer no codigo.</p>
+          <strong>Fluxo comercial completo</strong>
+          <p>A demo mostra como uma oportunidade vira diagnostico, perguntas, entregaveis e proposta pronta.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="screenshots">
+  <section class="section">
     <div class="wrap">
-      <h2>Screenshots</h2>
+      <div class="section-head">
+        <h2>Fluxo</h2>
+      </div>
+      <div class="flow">
+        <div class="flow-row"><span>01</span><strong>Coleta e organiza oportunidades freelance por plataforma.</strong></div>
+        <div class="flow-row"><span>02</span><strong>Calcula aderencia, categoria, risco e perguntas para fechar escopo.</strong></div>
+        <div class="flow-row"><span>03</span><strong>Estima horas, prazo, valor e confianca antes de qualquer envio.</strong></div>
+        <div class="flow-row"><span>04</span><strong>Gera uma proposta revisavel e acompanha o status comercial.</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="screens">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Telas reais da demo</h2>
+      </div>
       <div class="screens">
-        <div class="screen"><img src="images/dashboard.png" alt="Dashboard de oportunidades"></div>
-        <div class="screen"><img src="images/detail.png" alt="Detalhe de proposta"></div>
-        <div class="screen"><img src="images/proposal.png" alt="Proposta estruturada"></div>
-        <div class="screen"><img src="images/pdf.png" alt="PDF comercial gerado"></div>
+        <article class="screen">
+          <img src="images/demo-dashboard.png" alt="Central de oportunidades com lista de projetos">
+          <strong>Central de oportunidades</strong>
+          <p>Fila priorizada, KPIs, filtros e revisao lado a lado.</p>
+        </article>
+        <article class="screen">
+          <img src="images/demo-detail.png" alt="Detalhe da oportunidade e diagnostico">
+          <strong>Diagnostico e escopo</strong>
+          <p>Riscos, entregaveis, perguntas e estimativa comercial.</p>
+        </article>
+        <article class="screen">
+          <img src="images/demo-proposal.png" alt="Proposta editavel gerada pela demo">
+          <strong>Proposta editavel</strong>
+          <p>Texto pronto para revisar, adaptar e copiar para envio.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>Teste como se fosse o painel do produto.</h2>
+          <p>A demo roda no navegador porque GitHub Pages e estatico, mas preserva a logica de navegacao do dashboard.</p>
+        </div>
+        <a class="btn gold" href="demo.html">Experimentar agora</a>
       </div>
     </div>
   </section>
 
   <footer>
-    <div class="wrap">
-      FreelanceBot AI - Python, Flask, Playwright, Groq, SQLite e pytest.
-    </div>
+    <div class="wrap">FreelanceBot AI - Python, Flask, Playwright, Groq, SQLite e pytest.</div>
   </footer>
 </body>
 </html>
