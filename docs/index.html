@@ -71,6 +71,9 @@
     min-height: 610px;
     perspective: 1200px;
   }
+  .visual.preview-shot { min-height: auto; display: block; border-radius: 28px; border: 1px solid rgba(17,24,39,.1); background: white; overflow: hidden; box-shadow: var(--shadow); transform: rotateX(2deg) rotateY(-4deg) rotateZ(.4deg); }
+  .visual.preview-shot img { width: 100%; height: auto; display: block; }
+
   .halo { position: absolute; inset: 42px 20px auto auto; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(15,76,92,.22), transparent 64%); filter: blur(6px); }
   .console {
     position: absolute;
@@ -205,6 +208,7 @@
     .visual { min-height: auto; }
     .halo, .route { display: none; }
     .console, .estimate, .proposal { position: static; width: auto; transform: none; margin: 14px 0; animation: none; }
+    .visual.preview-shot { transform: none; border-radius: 18px; }
     .console { height: auto; border-radius: 24px; }
     .opportunity, .opportunity:nth-child(2), .opportunity:nth-child(3) { grid-template-columns: 1fr; transform: none; }
     .money { text-align: left; }
@@ -240,47 +244,9 @@
       </div>
     </section>
 
-    <section class="visual" aria-label="Demonstração animada do produto">
-      <div class="halo"></div>
-      <div class="console">
-        <div class="console-top"><strong>Radar</strong><span class="live">varredura concluída</span></div>
-        <div class="console-body">
-          <article class="opportunity">
-            <div class="score">92</div>
-            <div><div class="opp-title">Dashboard Power BI para vendas</div><div class="chips"><span class="chip">Power BI</span><span class="chip">Médio</span><span class="chip">validação</span></div></div>
-            <div class="money">R$ 2.400<div class="hours">27h</div></div>
-          </article>
-          <article class="opportunity">
-            <div class="score">78</div>
-            <div><div class="opp-title">Automação Python com API</div><div class="chips"><span class="chip">Python</span><span class="chip">API</span><span class="chip">logs</span></div></div>
-            <div class="money">R$ 2.900<div class="hours">30h</div></div>
-          </article>
-          <article class="opportunity">
-            <div class="score">86</div>
-            <div><div class="opp-title">Aplicação interna sob medida</div><div class="chips"><span class="chip">Full stack</span><span class="chip">escopo</span><span class="chip">API</span></div></div>
-            <div class="money">R$ 4.500<div class="hours">78h</div></div>
-          </article>
-        </div>
-      </div>
-      <aside class="estimate">
-        <small>Estimativa selecionada</small>
-        <div class="price">R$ 2.400</div>
-        <div class="estimate-grid">
-          <div class="cell"><span>Horas</span><strong>27h</strong></div>
-          <div class="cell"><span>Prazo</span><strong>5 a 8 dias</strong></div>
-          <div class="cell"><span>Categoria</span><strong>Power BI</strong></div>
-          <div class="cell"><span>Confiança</span><strong>95%</strong></div>
-        </div>
-      </aside>
-      <div class="route"></div>
-      <aside class="proposal">
-        <strong>Proposta para a plataforma</strong>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </aside>
-    </section>
+    <a class="visual preview-shot" href="demo.html" aria-label="Abrir dashboard do FreelanceBot Radar">
+      <img src="images/demo-dashboard.png?v=332f6a8-dashboard" alt="Dashboard real do FreelanceBot Radar com oportunidades, KPIs e proposta">
+    </a>
   </main>
 
   <section class="sections" id="fluxo">
