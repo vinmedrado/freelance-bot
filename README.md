@@ -18,6 +18,9 @@
 
 # FreelanceBot AI
 
+**QA (novembro/2026):** [resultados e limitações dos testes](docs/QA_SECURITY_REVIEW_2026.md)
+
+
 Sistema local para encontrar oportunidades freelance, avaliar aderencia ao perfil profissional, calcular preco/prazo e gerar propostas comerciais estruturadas para revisao humana.
 
 O projeto automatiza a triagem e a preparacao da proposta, mas nao envia propostas automaticamente.
